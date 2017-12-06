@@ -177,20 +177,7 @@ namespace Microsoft.Azure.Commands.Compute
             {
                 case SimpleParameterSet:
                     this.StartAndWait(
-                        StrategyExecuteCmdletAsync,
-                        () =>
-                        {
-                            var r = new [] { "|", "/", "-", "\\" };
-                            var x = r[DateTime.Now.Second % 4];
-                            WriteProgress(
-                                new ProgressRecord(
-                                    0,
-                                    "...",
-                                     x.ToString())
-                                {
-                                    CurrentOperation = "..."
-                                });
-                        });
+                        StrategyExecuteCmdletAsync);
                     break;
                 default:
                     DefaultExecuteCmdlet();
