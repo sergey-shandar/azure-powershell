@@ -26,10 +26,11 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
         /// </summary>
         /// <param name="cmdlet"></param>
         /// <param name="createAndStartTask"></param>
-        public static void StartAndWait(this Cmdlet cmdlet, Func<IAsyncCmdlet, Task> createAndStartTask)
+        public static void StartAndWait(
+            this Cmdlet cmdlet, Func<IAsyncCmdlet, Task> createAndStartTask, Action progressUpdate)
         {
             var asyncCmdlet = new AsyncCmdlet(cmdlet);
-            asyncCmdlet.Scheduler.Wait(createAndStartTask(asyncCmdlet));
+            asyncCmdlet.Scheduler.Wait(createAndStartTask(asyncCmdlet), progressUpdate);
         }
 
         sealed class AsyncCmdlet : IAsyncCmdlet

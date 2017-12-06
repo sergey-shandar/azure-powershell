@@ -176,7 +176,21 @@ namespace Microsoft.Azure.Commands.Compute
             switch (ParameterSetName)
             {
                 case SimpleParameterSet:
-                    this.StartAndWait(StrategyExecuteCmdletAsync);
+                    this.StartAndWait(
+                        StrategyExecuteCmdletAsync,
+                        () =>
+                        {
+                            var r = new [] { "|", "/", "-", "\\" };
+                            var x = r[DateTime.Now.Second % 4];
+                            WriteProgress(
+                                new ProgressRecord(
+                                    0,
+                                    "...",
+                                     x.ToString())
+                                {
+                                    CurrentOperation = "..."
+                                });
+                        });
                     break;
                 default:
                     DefaultExecuteCmdlet();
