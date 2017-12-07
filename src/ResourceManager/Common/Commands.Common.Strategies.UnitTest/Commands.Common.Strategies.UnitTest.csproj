@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6756A7F2-1141-4065-BA23-0C555D2A2BC3}</ProjectGuid>
+    <ProjectGuid>{5C052681-DA3C-4FEA-8E02-7DFBB2A18B22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Azure.Commands.Common.Strategies.UnitTest</RootNamespace>
