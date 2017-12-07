@@ -176,8 +176,7 @@ namespace Microsoft.Azure.Commands.Compute
             switch (ParameterSetName)
             {
                 case SimpleParameterSet:
-                    this.StartAndWait(
-                        StrategyExecuteCmdletAsync);
+                    this.StartAndWait(StrategyExecuteCmdletAsync);
                     break;
                 default:
                     DefaultExecuteCmdlet();
@@ -200,7 +199,11 @@ namespace Microsoft.Azure.Commands.Compute
                 .SelectMany(osAndMap => osAndMap
                     .Value
                     .Where(nameAndImage => nameAndImage.Key.ToLower() == ImageName.ToLower())
-                    .Select(nameAndImage => new { OsType = osAndMap.Key, Image = nameAndImage.Value }))
+                    .Select(nameAndImage => new
+                    {
+                        OsType = osAndMap.Key,
+                        Image = nameAndImage.Value
+                    }))
                 .FirstOrDefault();
 
             var isWindows = image.OsType == "Windows";
@@ -260,7 +263,7 @@ namespace Microsoft.Azure.Commands.Compute
             if (result != null)
             {
                 var psResult = ComputeAutoMapperProfile.Mapper.Map<PSVirtualMachine>(result);
-                psResult.Fqdn = fqdn;
+                psResult.FullyQualifiedDomainName = fqdn;
                 asyncCmdlet.WriteVerbose(isWindows
                     ? "Use 'mstsc /v:" + fqdn + "' to connect to the VM."
                     : "Use 'ssh " + Credential.UserName + "@" + fqdn + "' to connect to the VM.");

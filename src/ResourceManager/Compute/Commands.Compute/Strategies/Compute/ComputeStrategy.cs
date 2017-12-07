@@ -23,21 +23,21 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Compute
     {
         public static ResourceStrategy<TModel> Create<TModel, TOperations>(
             string type,
-            string header,
+            string provider,
             Func<ComputeManagementClient, TOperations> getOperations,
             Func<TOperations, GetAsyncParams, Task<TModel>> getAsync,
             Func<TOperations, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> createOrUpdateAsync,
             Func<TModel, int> createTime)
             where TModel : Resource
             => ResourceStrategy.Create(
-                type,
-                new[] { "Microsoft.Compute", header },
-                getOperations,
-                getAsync,
-                createOrUpdateAsync,
-                config => config.Location,
-                (config, location) => config.Location = location,
-                createTime,
-                true);
+                type: type,
+                providers: new[] { "Microsoft.Compute", provider },
+                getOperations: getOperations,
+                getAsync: getAsync,
+                createOrUpdateAsync: createOrUpdateAsync,
+                getLocation: config => config.Location,
+                setLocation: (config, location) => config.Location = location,
+                createTime: createTime,
+                compulsoryLocation: true);
     }
 }
