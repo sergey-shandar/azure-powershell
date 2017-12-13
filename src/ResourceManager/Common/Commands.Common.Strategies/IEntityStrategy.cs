@@ -12,6 +12,8 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using System;
+
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
     /// <summary>
@@ -19,5 +21,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies
     /// </summary>
     public interface IEntityStrategy
     {
+    }
+
+    public interface IEntityStrategy<TModel> : IEntityStrategy
+        where TModel : class
+    {
+        Func<string, TModel> IdToRef { get; }
     }
 }

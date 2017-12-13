@@ -18,7 +18,8 @@ using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public sealed class NestedResourceStrategy<TModel, TParentModel> : IEntityStrategy
+    public sealed class NestedResourceStrategy<TModel, TParentModel> : IEntityStrategy<TModel>
+        where TModel : class
     {
         public Func<string, IEnumerable<string>> GetId { get; }
 
@@ -26,14 +27,18 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 
         public Action<TParentModel, string, TModel> CreateOrUpdate { get; }
 
+        public Func<string, TModel> IdToRef { get; }
+
         public NestedResourceStrategy(
             Func<string, IEnumerable<string>> getId,
             Func<TParentModel, string, TModel> get,
-            Action<TParentModel, string, TModel> createOrUpdate)
+            Action<TParentModel, string, TModel> createOrUpdate,
+            Func<string, TModel> idToRef)
         {
             GetId = getId;
             Get = get;
             CreateOrUpdate = createOrUpdate;
+            IdToRef = idToRef;
         }
     }
 
@@ -42,20 +47,23 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         public static NestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
             string provider,
             Func<TParentModel, string, TModel> get,
-            Action<TParentModel, string, TModel> createOrUpdate)
+            Action<TParentModel, string, TModel> createOrUpdate,
+            Func<string, TModel> idToRef)
             where TModel : class
             where TParentModel : class
             => new NestedResourceStrategy<TModel, TParentModel>(
                 name => new[] { provider, name},
                 get,
-                createOrUpdate);
+                createOrUpdate,
+                idToRef);
 
         public static NestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
             string provider,
             Func<TParentModel, IList<TModel>> getList,
             Action<TParentModel, IList<TModel>> setList,
             Func<TModel, string> getName,
-            Action<TModel, string> setName)
+            Action<TModel, string> setName,
+            Func<string, TModel> idToRef)
             where TModel : class
             where TParentModel : class
             => Create<TModel, TParentModel>(
@@ -80,6 +88,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                         return;
                     }
                     list.Add(model);
-                });
+                },
+                idToRef);
     }
 }

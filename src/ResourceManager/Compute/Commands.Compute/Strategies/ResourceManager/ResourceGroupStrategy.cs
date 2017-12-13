@@ -30,6 +30,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.ResourceManager
                     => o.CreateOrUpdateAsync(p.Name, p.Model, p.CancellationToken),
                 getLocation: model => model.Location,
                 setLocation: (model, location) => model.Location = location,
+                getId: model => model.Id,
+                idToRef: id => new ResourceGroup(location: null, id: id),
                 createTime: _ => 3,
                 compulsoryLocation: false);
 

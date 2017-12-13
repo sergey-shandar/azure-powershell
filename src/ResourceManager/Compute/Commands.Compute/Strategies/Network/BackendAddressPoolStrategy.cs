@@ -12,13 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure.Management.Internal.Network.Version2017_10_01;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Network
@@ -31,31 +24,14 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                 getList: parentModel => parentModel.BackendAddressPools,
                 setList: (parentModel, list) => parentModel.BackendAddressPools = list,
                 getName: model => model.Name,
-                setName: (model, name) => model.Name = name);
+                setName: (model, name) => model.Name = name,
+                idToRef: id => new BackendAddressPool { Id = id });
 
         public static NestedResourceConfig<BackendAddressPool, LoadBalancer> CreateBackendAddressPool(
             this ResourceConfig<LoadBalancer> loadBalancer,
             string name)
                 => Strategy.CreateConfig(
                     parent: loadBalancer,
-                    name: name,
-                    createModel: subscriptionId => CreateBackendAddressPoolConfig(
-                        backendPoolName: name , subscriptionId: subscriptionId));
-
-        internal static BackendAddressPool CreateBackendAddressPoolConfig(
-            string backendPoolName,
-            string subscriptionId)
-        {
-            var backendAddressPool = new BackendAddressPool();
-            backendAddressPool.Name = backendPoolName;
-
-            backendAddressPool.Id =
-                LoadBalancerStrategy.GetResourceNotSetId(
-                    subscriptionId,
-                    LoadBalancerStrategy.LoadBalancerBackendAddressPoolName,
-                    backendAddressPool.Name);
-
-            return backendAddressPool;
-        }
+                    name: name);
     }
 }

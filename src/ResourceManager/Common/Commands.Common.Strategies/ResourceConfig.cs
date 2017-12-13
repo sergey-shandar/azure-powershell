@@ -42,6 +42,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 
         IResourceConfig IEntityConfig.Resource => this;
 
+        IEntityStrategy<TModel> IEntityConfig<TModel>.Strategy => Strategy;
+
         public ResourceConfig(
             ResourceStrategy<TModel> strategy,
             string resourceGroupName,
@@ -56,16 +58,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             Dependencies = dependencies;
         }
 
-        public IEnumerable<string> GetId(string subscription)
-            => new[]
-                {
-                    "subscriptions",
-                    subscription,
-                    "resourceGroups",
-                    ResourceGroupName
-                }
-                .Concat(Strategy.GetId(Name));
-
         TResult IEntityConfig.Accept<TContext, TResult>(
             IEntityConfigVisitor<TContext, TResult> visitor, TContext context)
             => visitor.Visit(this, context);
@@ -77,5 +69,15 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         TResult IResourceConfig.Accept<TContext, TResult>(
             IResourceConfigVisitor<TContext, TResult> visitor, TContext context)
             => visitor.Visit(this, context);
+
+        public IEnumerable<string> GetId(string subscription)
+            => new[]
+                {
+                    "subscriptions",
+                    subscription,
+                    "resourceGroups",
+                    ResourceGroupName
+                }
+                .Concat(Strategy.CreateId(Name));
     }
 }

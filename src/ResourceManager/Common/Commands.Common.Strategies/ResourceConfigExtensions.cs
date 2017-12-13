@@ -38,6 +38,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                 createModel ?? (_ => new TModel()),
                 dependencies.EmptyIfNull());
 
+        public static TModel CreateRef<TModel>(
+            this IEntityConfig<TModel> config, string subscriptionId)
+            where TModel : class
+            => config.Strategy.IdToRef(config.GetId(subscriptionId).IdToString());
+
         public static async Task<TModel> GetAsync<TModel>(
             this ResourceConfig<TModel> config,
             IClient client,

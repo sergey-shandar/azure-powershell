@@ -36,6 +36,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
     public interface IEntityConfig<TModel> : IEntityConfig
         where TModel : class
     {
+        new IEntityStrategy<TModel> Strategy { get; }
+
         TResult Accept<TContext, TResult>(
             IEntityConfigVisitor<TModel, TContext, TResult> visitor, TContext context);
     }

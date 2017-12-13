@@ -12,13 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure.Management.Internal.Network.Version2017_10_01;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Network
@@ -31,7 +25,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                 getList: parentModel => parentModel.FrontendIPConfigurations,
                 setList: (parentModel, list) => parentModel.FrontendIPConfigurations = list,
                 getName: model => model.Name,
-                setName: (model, name) => model.Name = name);
+                setName: (model, name) => model.Name = name,
+                idToRef: id => new FrontendIPConfiguration { Id = id });
 
         public static NestedResourceConfig<FrontendIPConfiguration, LoadBalancer> CreateFrontendIPConfiguration(
             this ResourceConfig<LoadBalancer> loadBalancer, 
@@ -45,31 +40,28 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                     createModel: subscriptionId => {
 
                         var frontEndConfig = CreateFrontendIpConfig(
-                                froontendPoolName: name,
-                                subscriptionId: subscriptionId,
-                                subnetId: subnet.GetId(subscriptionId).IdToString(),
-                                publicIpAddressId: publicIPAddress.GetId(subscriptionId).IdToString(),
-                                privateIpAddress: null,
-                                zones: zones);
+                            subscriptionId: subscriptionId,
+                            subnet: subnet,
+                            publicIpAddress: publicIPAddress,
+                            privateIpAddress: null,
+                            zones: zones);
 
                         return frontEndConfig;
                     });
 
         internal static FrontendIPConfiguration CreateFrontendIpConfig(
-            string froontendPoolName,
             string subscriptionId,
-            string subnetId,
-            string publicIpAddressId,
+            NestedResourceConfig<Subnet, VirtualNetwork> subnet,
+            ResourceConfig<PublicIPAddress> publicIpAddress,
             string privateIpAddress,
             IList<string> zones)
         {
             var frontendIpConfig = new FrontendIPConfiguration();
-            frontendIpConfig.Name = froontendPoolName;
             frontendIpConfig.Zones = zones;
 
-            if (!string.IsNullOrEmpty(subnetId))
+            if (subnet != null)
             {
-                frontendIpConfig.Subnet = new Subnet(subnetId);
+                frontendIpConfig.Subnet = subnet.CreateRef(subscriptionId);
 
                 if (!string.IsNullOrEmpty(privateIpAddress))
                 {
@@ -81,16 +73,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                     frontendIpConfig.PrivateIPAllocationMethod = LoadBalancerStrategy.Dynamic;
                 }
             }
-            else if (!string.IsNullOrEmpty(publicIpAddressId))
+            else if (publicIpAddress != null)
             {
-                frontendIpConfig.PublicIPAddress = new PublicIPAddress(publicIpAddressId);
+                frontendIpConfig.PublicIPAddress =
+                    publicIpAddress.CreateRef(subscriptionId);
             }
-
-            frontendIpConfig.Id =
-                LoadBalancerStrategy.GetResourceNotSetId(
-                    subscriptionId,
-                    LoadBalancerStrategy.LoadBalancerFrontendIpConfigName,
-                    frontendIpConfig.Name);
 
             return frontendIpConfig;
         }

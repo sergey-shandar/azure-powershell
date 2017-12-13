@@ -13,8 +13,6 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Network
 {
@@ -26,13 +24,14 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                 getList: parentModel => parentModel.Subnets,
                 setList: (parentModel, list) => parentModel.Subnets = list,
                 getName: model => model.Name,
-                setName: (model, name) => model.Name = name);
+                setName: (model, name) => model.Name = name,
+                idToRef: id => new Subnet { Id = id });
 
         public static NestedResourceConfig<Subnet, VirtualNetwork> CreateSubnet(
             this ResourceConfig<VirtualNetwork> virtualNetwork, string name, string addressPrefix)
             => Strategy.CreateConfig(
                 parent: virtualNetwork,
                 name: name,
-                createModel: _ => new Subnet { Name = name, AddressPrefix = addressPrefix });
+                createModel: _ => new Subnet { AddressPrefix = addressPrefix });
     }
 }

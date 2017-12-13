@@ -31,6 +31,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Compute
                     p.ResourceGroupName, p.Name, null, p.CancellationToken),
                 createOrUpdateAsync: (o, p) => o.CreateOrUpdateAsync(
                     p.ResourceGroupName, p.Name, p.Model, p.CancellationToken),
+                idToRef: id => new VirtualMachine(location: null, id: id),
                 createTime: c => c.OsProfile.WindowsConfiguration != null ? 240 : 120);
 
         public static ResourceConfig<VirtualMachine> CreateVirtualMachineConfig(

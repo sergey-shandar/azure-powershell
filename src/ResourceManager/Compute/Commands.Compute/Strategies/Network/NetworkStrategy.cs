@@ -28,16 +28,18 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
             Func<TOperations, GetAsyncParams, Task<TModel>> getAsync,
             Func<TOperations, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> createOrUpdateAsync,
             Func<TModel, int> createTime)
-            where TModel : Resource
+            where TModel : Resource, new()
             => ResourceStrategy.Create(
-                type,
-                new [] { "Microsoft.Network", provider },
-                getOperations,
-                getAsync,
-                createOrUpdateAsync, 
-                model => model.Location, 
-                (model, location) => model.Location = location,
-                createTime,
-                true);
+                type: type,
+                providers: new [] { "Microsoft.Network", provider },
+                getOperations: getOperations,
+                getAsync: getAsync,
+                createOrUpdateAsync: createOrUpdateAsync, 
+                getLocation: model => model.Location, 
+                setLocation: (model, location) => model.Location = location,
+                getId: model => model.Id,
+                idToRef: id => new TModel { Id = id },
+                createTime: createTime,
+                compulsoryLocation: true);
     }
 }

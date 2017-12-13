@@ -51,8 +51,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
         public static ResourceConfig<LoadBalancer> CreateLoadBalancerConfig(
             this ResourceConfig<ResourceGroup> resourceGroup,
             string name,
-            string froontendPoolName,
-            string backendPoolName,
             IList<string> zones,
             ResourceConfig<PublicIPAddress> publicIPAddress,
             NestedResourceConfig<Subnet, VirtualNetwork> subnet)
@@ -69,14 +67,20 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                     },
                     dependencies: new IEntityConfig[] { subnet, publicIPAddress });
 
-        internal static void NormalizeChildResourcesId(LoadBalancer loadBalancer, string subscriptionId, string resourceGroupName)
+        internal static void NormalizeChildResourcesId(
+            LoadBalancer loadBalancer, string subscriptionId, string resourceGroupName)
         {
             // Normalize LoadBalancingRules
             if (loadBalancer.LoadBalancingRules != null)
             {
                 foreach (var loadBalancingRule in loadBalancer.LoadBalancingRules)
                 {
-                    loadBalancingRule.Id = GetResourceId(subscriptionId, resourceGroupName, loadBalancer.Name, LoadBalancerRuleName, loadBalancingRule.Name);
+                    loadBalancingRule.Id = GetResourceId(
+                        subscriptionId,
+                        resourceGroupName,
+                        loadBalancer.Name,
+                        LoadBalancerRuleName,
+                        loadBalancingRule.Name);
 
                     if (loadBalancingRule.FrontendIPConfiguration != null)
                     {

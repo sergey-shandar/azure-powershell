@@ -61,6 +61,7 @@
     <Compile Include="IResourceStrategy.cs" />
     <Compile Include="IShouldProcess.cs" />
     <Compile Include="ProgressMap.cs" />
+    <Compile Include="Property.cs" />
     <Compile Include="TimeSlot.cs" />
     <Compile Include="StateOperationContext.cs" />
     <Compile Include="SyncTaskScheduler.cs" />

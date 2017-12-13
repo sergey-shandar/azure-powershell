@@ -42,6 +42,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 
         IEntityStrategy IEntityConfig.Strategy => Strategy;
 
+        IEntityStrategy<TModel> IEntityConfig<TModel>.Strategy => Strategy;
+
         public NestedResourceConfig(
             NestedResourceStrategy<TModel, TParenModel> strategy,            
             IEntityConfig<TParenModel> parent,

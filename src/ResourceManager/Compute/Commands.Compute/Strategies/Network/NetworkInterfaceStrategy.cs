@@ -41,26 +41,18 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
             => Strategy.CreateResourceConfig(
                 resourceGroup: resourceGroup,
                 name: name,
-                createModel: subscription => new NetworkInterface
+                createModel: subscriptionId => new NetworkInterface
                 {
                     IpConfigurations = new []
                     {
                         new NetworkInterfaceIPConfiguration
                         {
                             Name = name,
-                            Subnet = new Subnet { Id = subnet.GetId(subscription).IdToString() },
-                            PublicIPAddress = new PublicIPAddress
-                            {
-                                Id = publicIPAddress.GetId(subscription).IdToString()
-                            }
+                            Subnet = subnet.CreateRef(subscriptionId),
+                            PublicIPAddress = publicIPAddress.CreateRef(subscriptionId),
                         }
                     },
-                    NetworkSecurityGroup = networkSecurityGroup == null 
-                        ? null 
-                        : new NetworkSecurityGroup
-                        {
-                            Id = networkSecurityGroup.GetId(subscription).IdToString()
-                        }
+                    NetworkSecurityGroup = networkSecurityGroup?.CreateRef(subscriptionId)
                 },
                 dependencies: new IEntityConfig[] 
                 {

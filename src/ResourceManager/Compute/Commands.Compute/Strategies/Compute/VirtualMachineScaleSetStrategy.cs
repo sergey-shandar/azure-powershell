@@ -33,6 +33,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Compute
                     p.ResourceGroupName, p.Name, p.CancellationToken),
                 createOrUpdateAsync: (o, p) => o.CreateOrUpdateAsync(
                     p.ResourceGroupName, p.Name, p.Model, p.CancellationToken),
+                idToRef: id => new VirtualMachineScaleSet(location: null, id: id),
                 createTime: _ => 180);
 
         internal static ResourceConfig<VirtualMachineScaleSet> CreateVirtualMachineScaleSetConfig(
@@ -103,11 +104,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Compute
                     var ipConfig = new VirtualMachineScaleSetIPConfiguration
                     {
                         Name = name,
-                        LoadBalancerBackendAddressPools = new List<Microsoft.Azure.Management.Compute.Models.SubResource>(
-                            new[] {
+                        LoadBalancerBackendAddressPools = new List<Microsoft.Azure.Management.Compute.Models.SubResource>
+                            {
                                 new Microsoft.Azure.Management.Compute.Models.SubResource(
                                     id: backendAdressPool.GetId(subscriptionId).IdToString())
-                            }),
+                            },
                         Subnet = new ApiEntityReference { Id = subnet.GetId(subscriptionId).IdToString() }
                     };
 
