@@ -33,6 +33,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Network
                 type: type,
                 namespace_: "Microsoft.Network",
                 provider: provider,
+                getApiVersion: _ => "2017-10-01",
                 getOperations: getOperations,
                 getAsync: getAsync,
                 createOrUpdateAsync: createOrUpdateAsync, 

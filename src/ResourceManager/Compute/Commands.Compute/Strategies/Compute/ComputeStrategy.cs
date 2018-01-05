@@ -33,6 +33,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Compute
                 type: type,
                 namespace_: "Microsoft.Compute",
                 provider: provider,
+                getApiVersion: _ => "2017-12-01",
                 getOperations: getOperations,
                 getAsync: getAsync,
                 createOrUpdateAsync: createOrUpdateAsync,

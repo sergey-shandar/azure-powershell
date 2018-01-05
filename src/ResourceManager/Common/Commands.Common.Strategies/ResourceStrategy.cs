@@ -28,6 +28,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 
         public string Provider { get; }
 
+        public Func<IClient, string> GetApiVersion { get; }
+
         public Func<string, IEnumerable<string>> GetId { get; }
 
         public Func<IClient, GetAsyncParams, Task<TModel>> GetAsync { get; }
@@ -47,6 +49,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             string type,
             string namespace_,
             string provider,
+            Func<IClient, string> getApiVersion,
             Func<string, IEnumerable<string>> getId,
             Func<IClient, GetAsyncParams, Task<TModel>> getAsync,
             Func<IClient, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> createOrUpdateAsync,
@@ -58,6 +61,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             Type = type;
             Namespace = namespace_;
             Provider = provider;
+            GetApiVersion = getApiVersion;
             GetId = getId;
             GetAsync = getAsync;
             CreateOrUpdateAsync = createOrUpdateAsync;
@@ -74,6 +78,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             string type,
             string namespace_,
             string provider,
+            Func<TClient, string> getApiVersion,
             Func<string, IEnumerable<string>> getId,
             Func<TClient, TOperation> getOperations,
             Func<TOperation, GetAsyncParams, Task<TModel>> getAsync,
@@ -89,6 +94,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                 type,
                 namespace_,
                 provider,
+                client => getApiVersion(client.GetClient<TClient>()),
                 getId,
                 (client, p) => getAsync(toOperations(client), p),
                 (client, p) => createOrUpdateAsync(toOperations(client), p),
@@ -102,6 +108,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             string type,
             string namespace_,
             string provider,
+            Func<TClient, string> getApiVersion,
             Func<TClient, TOperation> getOperations,
             Func<TOperation, GetAsyncParams, Task<TModel>> getAsync,
             Func<TOperation, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> createOrUpdateAsync,
@@ -114,6 +121,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                 type,                
                 namespace_,
                 provider,
+                getApiVersion,
                 name => new[] { "providers", namespace_, provider, name }.Where(v => v != null),
                 getOperations,
                 getAsync,
@@ -122,5 +130,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                 setLocation,
                 createTime,
                 compulsoryLocation);
+
+        public static string GetResourceType(this IResourceStrategy strategy)
+            => strategy.Namespace == null ? null : strategy.Namespace + "/" + strategy.Provider;
     }
 }

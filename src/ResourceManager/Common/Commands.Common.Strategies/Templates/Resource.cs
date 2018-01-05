@@ -1,4 +1,7 @@
-﻿namespace Microsoft.Azure.Commands.Common.Strategies.Templates
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+
+namespace Microsoft.Azure.Commands.Common.Strategies.Templates
 {
     public class Resource
     {
@@ -10,7 +13,7 @@
 
         public string location { get; set; }
 
-        public object properties { get; set; }
+        public Dictionary<string, object> properties { get; set; }
 
         public string[] dependsOn { get; set; }
     }

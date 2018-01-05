@@ -14,7 +14,6 @@
 
 using Microsoft.Azure.Management.Internal.Resources;
 using Microsoft.Azure.Management.Internal.Resources.Models;
-using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.ResourceManager
 {
@@ -25,9 +24,10 @@ namespace Microsoft.Azure.Commands.Common.Strategies.ResourceManager
                 type: "resource group",
                 namespace_: null,
                 provider: null,
-                getOperations: (ResourceManagementClient client) => client.ResourceGroups,
+                getApiVersion: (ResourceManagementClient client) => client.ApiVersion,
+                getOperations: client => client.ResourceGroups,
                 getAsync: (o, p) => o.GetAsync(p.Name, p.CancellationToken),
-                createOrUpdateAsync: (o, p) 
+                createOrUpdateAsync: (o, p)
                     => o.CreateOrUpdateAsync(p.Name, p.Model, p.CancellationToken),
                 getLocation: model => model.Location,
                 setLocation: (model, location) => model.Location = location,

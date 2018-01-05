@@ -19,14 +19,18 @@ using Microsoft.Azure.Commands.Common.Strategies;
 using Microsoft.Azure.Commands.Common.Strategies.Compute;
 using Microsoft.Azure.Commands.Common.Strategies.Network;
 using Microsoft.Azure.Commands.Common.Strategies.ResourceManager;
+using Microsoft.Azure.Commands.Common.Strategies.Templates;
 using Microsoft.Azure.Commands.Compute.Common;
 using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Commands.Compute.Strategies;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
+using Microsoft.Azure.Management.Internal.Resources;
+using Microsoft.Azure.Management.Internal.Resources.Models;
 using Microsoft.Azure.Management.Storage;
 using Microsoft.Azure.Management.Storage.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Linq;
@@ -268,7 +272,43 @@ namespace Microsoft.Azure.Commands.Compute
             var fqdn = DomainNameLabel + "." + Location + ".cloudapp.azure.com";
 
             // create target state
-            var target = virtualMachine.GetTargetState(current, client.SubscriptionId, Location);          
+            var target = virtualMachine.GetTargetState(current, client.SubscriptionId, Location);
+
+            var template = virtualMachine.CreateTemplate(
+                client, target, client.SubscriptionId, Location);
+
+            var templateJson = JsonConvert.SerializeObject(template);
+
+            var rm = client.GetClient<ResourceManagementClient>();
+
+            var templateJson1 = Rest.Serialization.SafeJsonConvert.SerializeObject(
+                template, rm.SerializationSettings);
+
+            // apply target state
+            var tNewState = await resourceGroup
+                .UpdateStateAsync(
+                    client,
+                    target,
+                    new CancellationToken(),
+                    new ShouldProcess(asyncCmdlet),
+                    asyncCmdlet.ReportTaskProgress);
+
+            var p = new Deployment
+            {
+                Properties = new DeploymentProperties
+                {
+                    Template = template
+                }
+            };
+
+            var first = Rest.Serialization.SafeJsonConvert.SerializeObject(
+                template.resources[0].properties, rm.SerializationSettings);            
+
+            var tValidate = await rm.Deployments.ValidateAsync(resourceGroup.Name, Name, p);
+
+            var tResult = await rm.Deployments.CreateOrUpdateAsync(resourceGroup.Name, Name, p);
+
+            return;
 
             // apply target state
             var newState = await virtualMachine
