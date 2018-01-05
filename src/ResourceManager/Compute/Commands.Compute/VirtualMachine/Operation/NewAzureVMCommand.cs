@@ -274,17 +274,19 @@ namespace Microsoft.Azure.Commands.Compute
             // create target state
             var target = virtualMachine.GetTargetState(current, client.SubscriptionId, Location);
 
+            //
+
             var template = virtualMachine.CreateTemplate(
                 client, target, client.SubscriptionId, Location);
 
-            var templateJson = JsonConvert.SerializeObject(template);
+            // var templateJson = JsonConvert.SerializeObject(template);
 
-            var rm = client.GetClient<ResourceManagementClient>();
+            // var rm = client.GetClient<ResourceManagementClient>();
 
-            var templateJson1 = Rest.Serialization.SafeJsonConvert.SerializeObject(
-                template, rm.SerializationSettings);
+            // var templateJson1 = Rest.Serialization.SafeJsonConvert.SerializeObject(
+            //     template, rm.SerializationSettings);
 
-            // apply target state
+            // apply target state for resource group
             var tNewState = await resourceGroup
                 .UpdateStateAsync(
                     client,
