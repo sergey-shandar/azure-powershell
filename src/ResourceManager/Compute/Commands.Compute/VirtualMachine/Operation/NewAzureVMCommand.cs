@@ -23,6 +23,7 @@ using Microsoft.Azure.Commands.Compute.Common;
 using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Commands.Compute.StorageServices;
 using Microsoft.Azure.Commands.Compute.Strategies;
+using Microsoft.Azure.Commands.Compute.Strategies.Storage;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
@@ -300,56 +301,71 @@ namespace Microsoft.Azure.Commands.Compute
             }
             else
             {
-                var storageClient =
-                        AzureSession.Instance.ClientFactory.CreateArmClient<StorageManagementClient>(DefaultProfile.DefaultContext,
-                            AzureEnvironment.Endpoint.ResourceManager);
-                var st1 = storageClient.StorageAccounts.Create(ResourceGroupName, Name, new StorageAccountCreateParameters
-                {
-#if !NETSTANDARD
-                    AccountType = AccountType.PremiumLRS,
-#else
-                    Sku = new SM.Sku
-                    {
-                        Name = SkuName.PremiumLRS
-                    },
-#endif
-                    Location = Location
-                });
-                var filePath = new FileInfo(SessionState.Path.GetUnresolvedProviderPathFromPSPath(DiskFile));
+                var storageClient = AzureSession
+                    .Instance
+                    .ClientFactory
+                    .CreateArmClient<StorageManagementClient>(
+                        DefaultProfile.DefaultContext, AzureEnvironment.Endpoint.ResourceManager);
+
+                var st1 = storageClient.StorageAccounts.Create(
+                    ResourceGroupName,
+                    Name,
+                    StorageAccountStrategy.CreatePremiumLRS(location: Location));
+
+                var filePath = new FileInfo(
+                    SessionState.Path.GetUnresolvedProviderPathFromPSPath(DiskFile));
+
                 using (var vds = new VirtualDiskStream(filePath.FullName))
                 {
-                    if (vds.DiskType == DiskType.Fixed)
+                    if (vds.DiskType == DiskType.Fixed && filePath.Length % 512 != 0)
                     {
-                        long divisor = Convert.ToInt64(Math.Pow(2, 9));
-                        long rem = 0;
-                        Math.DivRem(filePath.Length, divisor, out rem);
-                        if (rem != 0)
-                        {
-                            throw new ArgumentOutOfRangeException("filePath", string.Format("Given vhd file '{0}' is a corrupted fixed vhd", filePath));
-                        }
+                        throw new ArgumentOutOfRangeException(
+                            "filePath",
+                            string.Format("Given vhd file '{0}' is a corrupted fixed vhd",
+                            filePath));
                     }
                 }
+
                 var storageAccount = storageClient.StorageAccounts.GetProperties(ResourceGroupName, Name);
+
                 BlobUri destinationUri = null;
-                BlobUri.TryParseUri(new Uri(string.Format("{0}{1}/{2}{3}", storageAccount.PrimaryEndpoints.Blob, Name.ToLower(), Name.ToLower(), ".vhd")), out destinationUri);
+                BlobUri.TryParseUri(
+                    new Uri(
+                        string.Format(
+                            "{0}{1}/{2}{3}",
+                            storageAccount.PrimaryEndpoints.Blob,
+                            Name.ToLower(),
+                            Name.ToLower(),
+                            ".vhd")),
+                    out destinationUri);
+
                 if (destinationUri == null || destinationUri.Uri == null)
                 {
                     throw new ArgumentNullException("destinationUri");
                 }
-                var storageCredentialsFactory = new StorageCredentialsFactory(this.ResourceGroupName, storageClient, DefaultContext.Subscription);
+
+                var storageCredentialsFactory = new StorageCredentialsFactory(
+                    ResourceGroupName, storageClient, DefaultContext.Subscription);
+
                 var parameters = new UploadParameters(destinationUri, null, filePath, true, 2)
                 {
                     Cmdlet = this,
-                    BlobObjectFactory = new CloudPageBlobObjectFactory(storageCredentialsFactory, TimeSpan.FromMinutes(1))
+                    BlobObjectFactory = new CloudPageBlobObjectFactory(
+                        storageCredentialsFactory, TimeSpan.FromMinutes(1))
                 };
-                if (!string.Equals(Environment.GetEnvironmentVariable("AZURE_TEST_MODE"), "Playback", StringComparison.OrdinalIgnoreCase))
+
+                if (!string.Equals(
+                    Environment.GetEnvironmentVariable("AZURE_TEST_MODE"),
+                    "Playback",
+                    StringComparison.OrdinalIgnoreCase))
                 {
                     var st2 = VhdUploaderModel.Upload(parameters);
                 }
+
                 var disk = resourceGroup.CreateManagedDiskConfig(
                     name: Name,
-                    sourceUri: destinationUri.Uri.ToString()
-                );
+                    sourceUri: destinationUri.Uri.ToString());
+
                 virtualMachine = resourceGroup.CreateVirtualMachineConfig(
                     name: Name,
                     networkInterface: networkInterface,

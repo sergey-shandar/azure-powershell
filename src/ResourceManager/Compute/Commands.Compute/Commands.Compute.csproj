@@ -287,6 +287,7 @@
     <Compile Include="Strategies\ResourceManager\ResourceConfigExtensions.cs" />
     <Compile Include="Strategies\ResourceManager\ResourceGroupStrategy.cs" />
     <Compile Include="Strategies\ShouldProcess.cs" />
+    <Compile Include="Strategies\Storage\StorageAccountStrategy.cs" />
     <Compile Include="Usage\GetAzureVMUsageCommand.cs" />
     <Compile Include="Usage\VirtualMachineUsageBaseCmdlet.cs" />
     <Compile Include="VirtualMachineSizes\GetAzureVMSizeCommand.cs" />
