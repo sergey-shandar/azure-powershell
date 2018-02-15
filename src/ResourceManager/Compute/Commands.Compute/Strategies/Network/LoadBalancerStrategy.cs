@@ -28,7 +28,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
         public const string Dynamic = "Dynamic";
         public const string Static = "Static";
         public const string LoadBalancerRuleName = "loadBalancingRules";
-        public const string LoadBalancerChildResourceId = "/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Network/loadBalancers/{2}/{3}/{4}";
+        public const string LoadBalancerChildResourceId = 
+            "/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Network/loadBalancers/{2}/{3}/{4}";
         public const string LoadBalancerInBoundNatRuleName = "inboundNatRules";
         public const string LoadBalancerInboundNatPoolName = "inboundNatPools";
         public const string LoadBalancerFrontendIpConfigName = "frontendIPConfigurations";
@@ -58,22 +59,19 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 => Strategy.CreateResourceConfig(
                     resourceGroup: resourceGroup,
                     name: name,
-                    createModel: subscriptionId =>
-                    {
-                        var lb = new LoadBalancer();
-                        NormalizeChildResourcesId(lb, subscriptionId, resourceGroup.Name);
-                        return lb;
-                    },
+                    createModel: engine => new LoadBalancer(),
                     dependencies: new IEntityConfig[] { subnet, publicIPAddress });
 
-        internal static void NormalizeChildResourcesId(LoadBalancer loadBalancer, string subscriptionId, string resourceGroupName)
+        /*
+        internal static void NormalizeChildResourcesId(
+            LoadBalancer loadBalancer, IEngine engine)
         {
             // Normalize LoadBalancingRules
             if (loadBalancer.LoadBalancingRules != null)
             {
                 foreach (var loadBalancingRule in loadBalancer.LoadBalancingRules)
                 {
-                    loadBalancingRule.Id = GetResourceId(subscriptionId, resourceGroupName, loadBalancer.Name, LoadBalancerRuleName, loadBalancingRule.Name);
+                    loadBalancingRule.Id = engine.GetId(loadBalancer) GetResourceId(subscriptionId, resourceGroupName, loadBalancer.Name, LoadBalancerRuleName, loadBalancingRule.Name);
 
                     if (loadBalancingRule.FrontendIPConfiguration != null)
                     {
@@ -109,7 +107,12 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
             {
                 foreach (var inboundNatRule in loadBalancer.InboundNatRules)
                 {
-                    inboundNatRule.Id = GetResourceId(subscriptionId, resourceGroupName, loadBalancer.Name, LoadBalancerInBoundNatRuleName, inboundNatRule.Name);
+                    inboundNatRule.Id = GetResourceId(
+                        subscriptionId,
+                        resourceGroupName,
+                        loadBalancer.Name,
+                        LoadBalancerInBoundNatRuleName,
+                        inboundNatRule.Name);
 
                     if (inboundNatRule.FrontendIPConfiguration != null)
                     {
@@ -167,13 +170,14 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 }
             }
         }
+        */
 
         internal static string GetResourceId(
-                    string subscriptionId,
-                    string resourceGroupName,
-                    string loadBalancerName,
-                    string resource,
-                    string resourceName)
+            string subscriptionId,
+            string resourceGroupName,
+            string loadBalancerName,
+            string resource,
+            string resourceName)
         {
             return string.Format(
                 LoadBalancerChildResourceId,
@@ -184,7 +188,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 resourceName);
         }
 
-        internal static string GetResourceNotSetId(string subscriptionId, string resource, string resourceName)
+        internal static string GetResourceNotSetId(
+            string subscriptionId, string resource, string resourceName)
         {
             return string.Format(
                 LoadBalancerChildResourceId,
@@ -195,7 +200,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 resourceName);
         }
 
-        internal static string NormalizeLoadBalancerChildResourceIds(string id, string resourceGroupName, string loadBalancerName)
+        internal static string NormalizeLoadBalancerChildResourceIds(
+            string id, string resourceGroupName, string loadBalancerName)
         {
             id = NormalizeId(id, "resourceGroups", resourceGroupName);
             id = NormalizeId(id, "loadBalancers", loadBalancerName);

@@ -33,23 +33,12 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 => Strategy.CreateConfig(
                     parent: loadBalancer,
                     name: name,
-                    createModel: subscriptionId => CreateBackendAddressPoolConfig(
-                        backendPoolName: name , subscriptionId: subscriptionId));
+                    createModel: engine => CreateBackendAddressPoolConfig(
+                        backendPoolName: name, engine: engine));
 
         internal static BackendAddressPool CreateBackendAddressPoolConfig(
             string backendPoolName,
-            string subscriptionId)
-        {
-            var backendAddressPool = new BackendAddressPool();
-            backendAddressPool.Name = backendPoolName;
-
-            backendAddressPool.Id =
-                LoadBalancerStrategy.GetResourceNotSetId(
-                    subscriptionId,
-                    LoadBalancerStrategy.LoadBalancerBackendAddressPoolName,
-                    backendAddressPool.Name);
-
-            return backendAddressPool;
-        }
+            IEngine engine)
+            => new BackendAddressPool { };
     }
 }

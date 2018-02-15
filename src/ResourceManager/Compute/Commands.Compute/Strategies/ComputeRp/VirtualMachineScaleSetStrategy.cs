@@ -40,7 +40,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
             this ResourceConfig<ResourceGroup> resourceGroup,
             string name,
             NestedResourceConfig<Subnet, VirtualNetwork> subnet,
-            IEnumerable<NestedResourceConfig<FrontendIPConfiguration, LoadBalancer>> frontendIpConfigurations,
+            IEnumerable<NestedResourceConfig<FrontendIPConfiguration, LoadBalancer>>
+                frontendIpConfigurations,
             NestedResourceConfig<BackendAddressPool, LoadBalancer> backendAdressPool,
             Func<ImageAndOsType> getImageAndOsType,
             string adminUsername,
@@ -51,13 +52,13 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
             => Strategy.CreateResourceConfig(
                 resourceGroup: resourceGroup,
                 name: name,
-                createModel: subscriptionId =>
+                createModel: engine =>
                 {
                     var imageAndOsType = getImageAndOsType();
                     var vmss = new VirtualMachineScaleSet()
                     {
                         Zones = frontendIpConfigurations
-                            ?.Select(f => f.CreateModel(subscriptionId))
+                            ?.Select(f => f.CreateModel(engine))
                             ?.Where(z => z?.Zones != null)
                             .SelectMany(z => z.Zones)
                             .Where(z => z != null)
@@ -100,9 +101,9 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                         LoadBalancerBackendAddressPools = new []
                         {
                             new Azure.Management.Compute.Models.SubResource(
-                                id: backendAdressPool.GetIdStr(subscriptionId))
+                                id: engine.GetId(backendAdressPool))
                         },
-                        Subnet = new ApiEntityReference { Id = subnet.GetIdStr(subscriptionId) }
+                        Subnet = new ApiEntityReference { Id = engine.GetId(subnet) }
                     };
 
 

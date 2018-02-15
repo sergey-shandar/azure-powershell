@@ -43,7 +43,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                     .Concat(config.GetIdFromSubscription())
                     .IdToString();
 
-        static IEnumerable<string> GetProvidersId(this IEntityConfig config)
+        public static IEnumerable<string> GetProvidersId(this IEntityConfig config)
             => new[] { "providers" }.Concat(config.GetIdFromResourceGroup());
 
     }

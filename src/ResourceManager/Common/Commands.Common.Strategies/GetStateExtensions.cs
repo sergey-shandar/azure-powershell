@@ -32,7 +32,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             this ResourceConfig<TModel> config,
             IClient client,
             CancellationToken cancellationToken)
-            where TModel : class
+            where TModel : class, new()
         {
             var context = new StateOperationContext(client, cancellationToken);
             await context.GetStateAsyncDispatch(config);
