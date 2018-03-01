@@ -33,7 +33,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 
         public Func<TModel, int> CreateTime { get; }
 
-        public bool CompulsoryLocation { get; }
+        public bool CompulsoryLocation
+            => Type.Namespace != ResourceType.ResourceGroup.Namespace;
 
         public ResourceStrategy(
             ResourceType type,
@@ -41,8 +42,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             Func<IClient, GetAsyncParams, Task<TModel>> getAsync,
             Func<IClient, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> createOrUpdateAsync,
             Property<TModel, string> location,
-            Func<TModel, int> createTime,
-            bool compulsoryLocation)
+            Func<TModel, int> createTime)
         {
             Type = type;
             GetApiVersion = getApiVersion;
@@ -50,7 +50,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             CreateOrUpdateAsync = createOrUpdateAsync;
             Location = location;
             CreateTime = createTime;
-            CompulsoryLocation = compulsoryLocation;
         }
     }
 
@@ -64,8 +63,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             Func<TOperation, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> createOrUpdateAsync,
             Func<TModel, string> getLocation,
             Action<TModel, string> setLocation,
-            Func<TModel, int> createTime,
-            bool compulsoryLocation)
+            Func<TModel, int> createTime)
             where TModel : class
             where TClient : ServiceClient<TClient>
         {
@@ -76,8 +74,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                 (client, p) => getAsync(toOperations(client), p),
                 (client, p) => createOrUpdateAsync(toOperations(client), p),
                 Property.Create(getLocation, setLocation),
-                createTime,
-                compulsoryLocation);
+                createTime);
         }
 
         public static string GetResourceType(this IResourceStrategy strategy)

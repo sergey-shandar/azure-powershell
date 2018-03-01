@@ -37,7 +37,6 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                 createOrUpdateAsync: createOrUpdateAsync,
                 getLocation: config => config.Location,
                 setLocation: (config, location) => config.Location = location,
-                createTime: createTime,
-                compulsoryLocation: true);
+                createTime: createTime);
     }
 }

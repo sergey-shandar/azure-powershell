@@ -120,7 +120,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             LoadBalancerName = LoadBalancerName ?? VMScaleSetName;
             FrontendPoolName = FrontendPoolName ?? VMScaleSetName;
             BackendPoolName = BackendPoolName ?? VMScaleSetName;
-            var LoadBalancingRuleName = LoadBalancerName;
 
             var imageAndOsType = new ImageAndOsType(OperatingSystemTypes.Windows, null);
 
@@ -149,11 +148,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             if (BackendPort != null)
             {
-                var LoadBalancingRuleName = LoadBalancerName;
+                var loadBalancingRuleName = LoadBalancerName;
                 foreach (var backendPort in BackendPort)
                 {
                     loadBalancer.CreateLoadBalancingRule(
-                        name: LoadBalancingRuleName + backendPort.ToString(),
+                        name: loadBalancingRuleName + backendPort.ToString(),
                         fronendIpConfiguration: frontendIpConfiguration,
                         backendAddressPool: backendAddressPool,
                         frontendPort: backendPort,
