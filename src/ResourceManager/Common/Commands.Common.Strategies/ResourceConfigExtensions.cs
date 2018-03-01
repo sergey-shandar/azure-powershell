@@ -82,8 +82,12 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                     cancellationToken));
 
         public static IEnumerable<IResourceConfig> GetResourceDependencies(
-            this IResourceConfig config)
-            => config.Dependencies.Select(d => d.Resource);
+            this IEntityConfig config)
+            => config
+                .Dependencies
+                .Select(d => d.Resource)                
+                .Concat(config.NestedResources.SelectMany(GetResourceDependencies))
+                .Where(r => r != config);
 
         public static string GetFullName(this IResourceConfig config)
             => config.Strategy.Type.Provider + "/" + config.Name;

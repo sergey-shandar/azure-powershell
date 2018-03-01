@@ -39,15 +39,9 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 name,
                 engine => new LoadBalancingRule
                 {
-                    FrontendIPConfiguration = new SubResource
-                    {
-                        Id = engine.GetId(fronendIpConfiguration)
-                    },
-                    BackendAddressPool = new SubResource
-                    {
-                        Id = engine.GetId(backendAddressPool)
-                    },
-                    Protocol = "Tcp",
+                    FrontendIPConfiguration = engine.GetReference(fronendIpConfiguration),
+                    BackendAddressPool = engine.GetReference(backendAddressPool),
+                    Protocol = NetworkStrategy.Tcp,
                     FrontendPort = frontendPort,
                     BackendPort = backendPort,
                 });
