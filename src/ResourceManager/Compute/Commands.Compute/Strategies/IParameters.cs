@@ -5,6 +5,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
 {
     /// <summary>
     /// Parameters for creating a config.
+    /// TODO: move it to Strategy library.
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     interface IParameters<TModel>
