@@ -301,8 +301,7 @@ namespace Microsoft.Azure.Commands.Compute
                         networkInterface: networkInterface,
                         imageAndOsType: ImageAndOsType,
                         adminUsername: _cmdlet.Credential.UserName,
-                        adminPassword:
-                            new NetworkCredential(string.Empty, _cmdlet.Credential.Password).Password,
+                        adminPassword: _cmdlet.Credential.Password,
                         size: _cmdlet.Size,
                         availabilitySet: availabilitySet,
                         dataDisks: _cmdlet.DataDiskSizeInGb);

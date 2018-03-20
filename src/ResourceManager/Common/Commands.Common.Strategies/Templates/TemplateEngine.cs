@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Security;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Templates
 {
@@ -8,7 +9,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
         public string GetId(IEntityConfig config)
             => "[concat(resourceGroup().id, '" + config.GetProvidersId().IdToString() + "')]";
 
-        public string GetSecureString(string name, string secret)
+        public string GetSecureString(string name, SecureString secret)
         {
             SecureStrings.AddOrUpdate(
                 name,
@@ -17,11 +18,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
                 {
                     throw new Exception("The template parameter '" + name + "' already exists.");
                 });
-            return secret;
+            return "[parameters('" + name + "')]";
         }
 
-        public ConcurrentDictionary<string, string> SecureStrings { get; }
-            = new ConcurrentDictionary<string, string>();
+        public ConcurrentDictionary<string, SecureString> SecureStrings { get; }
+            = new ConcurrentDictionary<string, SecureString>();
 
         public TemplateEngine() { }
     }

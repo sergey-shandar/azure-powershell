@@ -20,6 +20,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Microsoft.Azure.Commands.Common.Strategies;
+using System.Security;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
 {
@@ -44,7 +45,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
             IEnumerable<NestedResourceConfig<InboundNatPool, LoadBalancer>> inboundNatPools,
             ImageAndOsType imageAndOsType,
             string adminUsername,
-            string adminPassword,
+            SecureString adminPassword,
             string vmSize,
             int instanceCount,
             UpgradeMode? upgradeMode,
@@ -79,7 +80,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                             WindowsConfiguration = imageAndOsType.CreateWindowsConfiguration(),
                             LinuxConfiguration = imageAndOsType.CreateLinuxConfiguration(),
                             AdminUsername = adminUsername,
-                            AdminPassword = adminPassword,
+                            AdminPassword = engine.GetSecureString("password", adminPassword),
                         },
                         StorageProfile = new VirtualMachineScaleSetStorageProfile
                         {

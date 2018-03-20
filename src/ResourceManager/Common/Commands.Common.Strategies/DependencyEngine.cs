@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Security;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
@@ -29,7 +30,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             return id;
         }
 
-        public string GetSecureString(string name, string secret)
+        public string GetSecureString(string name, SecureString secret)
             => null;
     }
 }
