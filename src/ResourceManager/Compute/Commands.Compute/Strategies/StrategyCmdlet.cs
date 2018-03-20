@@ -1,4 +1,6 @@
 ﻿using Microsoft.Azure.Commands.Common.Strategies;
+using Microsoft.Azure.Commands.Common.Strategies.Templates;
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,18 +27,32 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
             // update a DAG of configs.
             config = await parameters.CreateConfigAsync();
 
-            var engine = new SdkEngine(client.SubscriptionId);
-            var target = config.GetTargetState(current, engine, parameters.Location);
+            if (parameters.AsArmTemplate)
+            {
+                // create target state
+                var target = config.GetTargetState(current, TemplateEngine.Instance, parameters.Location);
 
-            // apply target state
-            var newState = await config.UpdateStateAsync(
-                client,
-                target,
-                cancellationToken,
-                new ShouldProcess(asyncCmdlet),
-                asyncCmdlet.ReportTaskProgress);
+                var template = config.CreateTemplate(client, target, client.SubscriptionId);
+                var templateResult = JsonConvert.SerializeObject(template);
+                asyncCmdlet.WriteObject(templateResult);
 
-            return newState.Get(config) ?? current.Get(config);
+                return null;
+            }
+            else
+            {
+                var engine = new SdkEngine(client.SubscriptionId);
+                var target = config.GetTargetState(current, engine, parameters.Location);
+
+                // apply target state
+                var newState = await config.UpdateStateAsync(
+                    client,
+                    target,
+                    cancellationToken,
+                    new ShouldProcess(asyncCmdlet),
+                    asyncCmdlet.ReportTaskProgress);
+
+                return newState.Get(config) ?? current.Get(config);
+            }
         }
     }
 }
