@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Concurrent;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
@@ -27,5 +28,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             Dependencies.GetOrAdd(id, config);
             return id;
         }
+
+        public string GetSecureString(string name, string secret)
+            => null;
     }
 }

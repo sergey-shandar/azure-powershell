@@ -30,9 +30,10 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
             if (parameters.AsArmTemplate)
             {
                 // create target state
-                var target = config.GetTargetState(current, TemplateEngine.Instance, parameters.Location);
+                var templateEngine = new TemplateEngine();
+                var target = config.GetTargetState(current, templateEngine, parameters.Location);
 
-                var template = config.CreateTemplate(client, target, client.SubscriptionId);
+                var template = config.CreateTemplate(client, target, templateEngine);
                 var templateResult = JsonConvert.SerializeObject(template);
                 asyncCmdlet.WriteObject(templateResult);
 

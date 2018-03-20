@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
@@ -32,5 +33,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             => new[] { ResourceId.Subscriptions, _SubscriptionId } 
                 .Concat(config.GetIdFromSubscription()) 
                 .IdToString();
+
+        public string GetSecureString(string name, string secret)
+            => secret;
     }
 }

@@ -34,10 +34,10 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
             this ResourceConfig<TModel> config,
             IClient client,
             IState target,
-            string subscriptionId)
+            TemplateEngine engine)
             where TModel : class
         {
-            var context = new Context(client, target, subscriptionId);
+            var context = new Context(client, target, engine);
             context.CreateResource(config);
             return new Template
             {
@@ -52,16 +52,16 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
 
             public IState Target { get; }
 
-            public string SubscriptionId { get; }
+            public TemplateEngine Engine { get; }
 
             public ConcurrentDictionary<string, Resource> Map { get; }
                 = new ConcurrentDictionary<string, Resource>();
 
-            public Context(IClient client, IState target, string subscriptionId)
+            public Context(IClient client, IState target, TemplateEngine engine)
             {
                 Client = client;
                 Target = target;
-                SubscriptionId = subscriptionId;
+                Engine = engine;
             }
 
             public void CreateResource<TModel>(ResourceConfig<TModel> config)
@@ -90,7 +90,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
                                 properties = jsonModel["properties"] as JObject,
                                 dependsOn = dependencies
                                     .Where(d => d.ResourceGroup != null)
-                                    .Select(TemplateEngine.Instance.GetId)
+                                    .Select(Engine.GetId)
                                     .ToArray()
                             };
                         });
