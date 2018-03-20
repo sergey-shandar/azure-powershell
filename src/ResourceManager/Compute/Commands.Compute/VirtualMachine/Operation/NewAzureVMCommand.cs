@@ -217,7 +217,8 @@ namespace Microsoft.Azure.Commands.Compute
         [Parameter(ParameterSetName = DiskFileParameterSet, Mandatory = false)]
         public int[] DataDiskSizeInGb { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(ParameterSetName = SimpleParameterSet, Mandatory = false)]
+        [Parameter(ParameterSetName = DiskFileParameterSet, Mandatory = false)]
         public SwitchParameter AsArmTemplate { get; set; }
 
         public override void ExecuteCmdlet()
@@ -255,6 +256,9 @@ namespace Microsoft.Azure.Commands.Compute
                 get { return _cmdlet.Location; }
                 set { _cmdlet.Location = value; }
             }
+
+            public bool AsArmTemplate
+                => _cmdlet.AsArmTemplate;
 
             public BlobUri DestinationUri;
 

@@ -14,5 +14,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
         string Location { get; set; }
 
         Task<ResourceConfig<TModel>> CreateConfigAsync();
+
+        bool AsArmTemplate { get; }
     }
 }
