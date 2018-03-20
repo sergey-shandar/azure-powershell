@@ -13,6 +13,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
         {
             public T GetClient<T>() where T : ServiceClient<T>
                 => this as T;
+
+            public string SubscriptionId { get; }
         }
 
         class NestedModel

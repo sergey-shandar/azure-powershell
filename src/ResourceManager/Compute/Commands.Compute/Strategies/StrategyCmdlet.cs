@@ -7,7 +7,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
     static class StrategyCmdlet
     {
         public static async Task<TModel> RunAsync<TModel>(
-            Client client,
+            IClient client,
             IParameters<TModel> parameters,
             IAsyncCmdlet asyncCmdlet,
             CancellationToken cancellationToken)
