@@ -259,7 +259,8 @@ namespace Microsoft.Azure.Commands.Compute
 
             public BlobUri DestinationUri;
 
-            public async Task<ResourceConfig<VirtualMachine>> CreateConfigAsync()
+            public async Task<ResourceConfig<VirtualMachine>> CreateConfigAsync(
+                ResourceConfig<ResourceGroup> resourceGroup)
             {
                 if (_cmdlet.DiskFile == null)
                 {
@@ -273,7 +274,6 @@ namespace Microsoft.Azure.Commands.Compute
                     location: Location,
                     client: _client);
 
-                var resourceGroup = ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
                 var virtualNetwork = resourceGroup.CreateVirtualNetworkConfig(
                     name: _cmdlet.VirtualNetworkName, addressPrefix: _cmdlet.AddressPrefix);
                 var subnet = virtualNetwork.CreateSubnet(_cmdlet.SubnetName, _cmdlet.SubnetAddressPrefix);
@@ -410,7 +410,8 @@ namespace Microsoft.Azure.Commands.Compute
                 }
             }
 
-            var result = await StrategyCmdlet.RunAsync(client, parameters, asyncCmdlet, new CancellationToken());
+            var result = await StrategyCmdlet.RunAsync(
+                client, parameters, ResourceGroupName, asyncCmdlet, new CancellationToken());
 
             if (result != null)
             {

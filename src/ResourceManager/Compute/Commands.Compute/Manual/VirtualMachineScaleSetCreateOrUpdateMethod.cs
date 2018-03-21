@@ -21,6 +21,7 @@ using Microsoft.Azure.Commands.Compute.Strategies.Network;
 using Microsoft.Azure.Commands.Compute.Strategies.ResourceManager;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute.Models;
+using Microsoft.Azure.Management.Internal.Resources.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
@@ -142,7 +143,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             public bool AsArmTemplate
                 => _cmdlet.AsArmTemplate;
 
-            public async Task<ResourceConfig<VirtualMachineScaleSet>> CreateConfigAsync()
+            public async Task<ResourceConfig<VirtualMachineScaleSet>> CreateConfigAsync(
+                ResourceConfig<ResourceGroup> resourceGroup)
             {
                 ImageAndOsType = await _client.UpdateImageAndOsTypeAsync(
                     ImageAndOsType, _cmdlet.ResourceGroupName, _cmdlet.ImageName, Location);
@@ -153,8 +155,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     name: _cmdlet.VMScaleSetName,
                     location: Location,
                     client: _client);
-
-                var resourceGroup = ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
 
                 var publicIpAddress = resourceGroup.CreatePublicIPAddressConfig(
                     name: _cmdlet.PublicIpAddressName,
@@ -244,7 +244,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             var parameters = new Parameters(this, client);
 
             var result = await StrategyCmdlet.RunAsync(
-                client, parameters, asyncCmdlet, new CancellationToken());
+                client, parameters, ResourceGroupName, asyncCmdlet, new CancellationToken());
 
             if (result != null)
             {

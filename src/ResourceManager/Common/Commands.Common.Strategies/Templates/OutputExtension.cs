@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
     public static class OutputExtension
     {
         public static T GetModel<T>(this Output output)
-            where T : class, new()
+            where T : class
         {
             var jModel = new JObject { { "properties", output.value as JToken } };
             return new Converters().Deserialize<T>(jModel);

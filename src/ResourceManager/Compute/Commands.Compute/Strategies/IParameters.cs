@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Commands.Common.Strategies;
+using Microsoft.Azure.Management.Internal.Resources.Models;
 using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies
@@ -13,7 +14,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
     {
         string Location { get; set; }
 
-        Task<ResourceConfig<TModel>> CreateConfigAsync();
+        Task<ResourceConfig<TModel>> CreateConfigAsync(ResourceConfig<ResourceGroup> resourceGroup);
 
         bool AsArmTemplate { get; }
     }
