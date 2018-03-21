@@ -1,6 +1,8 @@
 ﻿using Microsoft.Azure.Commands.Common.Strategies;
 using Microsoft.Azure.Commands.Common.Strategies.Templates;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,6 +36,28 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
                 var target = config.GetTargetState(current, templateEngine, parameters.Location);
 
                 var template = config.CreateTemplate(client, target, templateEngine);
+                template.parameters = templateEngine
+                    .SecureStrings
+                    .Keys
+                    .ToDictionary(
+                        k => k,
+                        _ => new Parameter { type = "secureString" });
+                template.outputs = new Dictionary<string, Output>
+                {
+                    {
+                        "result",
+                        new Output
+                        {
+                            type = "object",
+                            value = 
+                                "[reference('" 
+                                + config.GetIdFromResourceGroup().IdToString() + 
+                                "', '" + 
+                                config.Strategy.GetApiVersion(client) + 
+                                "')]"
+                        }
+                    }
+                };
                 var templateResult = JsonConvert.SerializeObject(template);
                 asyncCmdlet.WriteObject(templateResult);
 

@@ -18,7 +18,7 @@ using Microsoft.Azure.Management.Internal.Resources.Models;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
 using Microsoft.Azure.Commands.Common.Strategies;
 using System.Collections.Generic;
-using System.Security;
+using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
 {
@@ -42,8 +42,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
             string name,
             ResourceConfig<NetworkInterface> networkInterface,
             ImageAndOsType imageAndOsType,
-            string adminUsername,
-            SecureString adminPassword,
+            PSCredential admin,
             string size,
             ResourceConfig<AvailabilitySet> availabilitySet,
             IEnumerable<int> dataDisks)
@@ -57,8 +56,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                         ComputerName = name,
                         WindowsConfiguration = imageAndOsType.CreateWindowsConfiguration(),
                         LinuxConfiguration = imageAndOsType.CreateLinuxConfiguration(),
-                        AdminUsername = adminUsername,
-                        AdminPassword = engine.GetSecureString("password", adminPassword),
+                        AdminUsername = admin.UserName,
+                        AdminPassword = engine.GetSecureString("adminPassword", admin.Password),
                     },
                     NetworkProfile = new NetworkProfile
                     {

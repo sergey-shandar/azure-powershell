@@ -40,7 +40,6 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
-using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -300,8 +299,7 @@ namespace Microsoft.Azure.Commands.Compute
                         name: _cmdlet.Name,
                         networkInterface: networkInterface,
                         imageAndOsType: ImageAndOsType,
-                        adminUsername: _cmdlet.Credential.UserName,
-                        adminPassword: _cmdlet.Credential.Password,
+                        admin: _cmdlet.Credential,
                         size: _cmdlet.Size,
                         availabilitySet: availabilitySet,
                         dataDisks: _cmdlet.DataDiskSizeInGb);
