@@ -15,6 +15,7 @@
 using Microsoft.Azure.Commands.Common.Strategies.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Templates
@@ -87,6 +88,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
                                 type = config.Strategy.GetResourceType(),
                                 apiVersion = config.Strategy.GetApiVersion(Client),
                                 location = config.Strategy.Location.Get(model),
+                                sku = new Converters().Deserialize<Dictionary<string, object>>(jsonModel["sku"]),
                                 properties = jsonModel["properties"] as JObject,
                                 dependsOn = dependencies
                                     .Where(d => d.ResourceGroup != null)

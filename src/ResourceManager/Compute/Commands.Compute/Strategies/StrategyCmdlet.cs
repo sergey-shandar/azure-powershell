@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Commands.Common.Strategies;
+using Microsoft.Azure.Commands.Common.Strategies.Json;
 using Microsoft.Azure.Commands.Common.Strategies.Templates;
 using Microsoft.Azure.Commands.Compute.Strategies.ResourceManager;
 using Microsoft.Azure.Management.Internal.Resources;
@@ -66,7 +67,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
                         }
                     }
                 };
-                var templateResult = JsonConvert.SerializeObject(template);
+                var templateResult = new Converters().Serialize(template).ToString();
                 asyncCmdlet.WriteObject(templateResult);
 
                 // deployment

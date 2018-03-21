@@ -43,6 +43,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
         /// </summary>
         public string location { get; set; }
 
+        public Dictionary<string, object> sku { get; set; }
+
         /// <summary>
         /// Resource properties.
         /// </summary>
