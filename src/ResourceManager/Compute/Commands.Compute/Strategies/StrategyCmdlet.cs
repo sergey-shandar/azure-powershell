@@ -102,7 +102,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
                     deploymentName: config.Name,
                     parameters: deployment);
 
-                var tResult = await rmClient.Deployments.ValidateAsync(
+                var tResult = await rmClient.Deployments.CreateOrUpdateAsync(
                     resourceGroupName: config.ResourceGroup.Name,
                     deploymentName: config.Name,
                     parameters: deployment);
