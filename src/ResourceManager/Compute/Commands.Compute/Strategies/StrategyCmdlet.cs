@@ -71,7 +71,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
                 asyncCmdlet.WriteObject(templateResult);
 
                 // deployment
-
+                /*
                 // create a resource group.
                 await resourceGroup
                     .UpdateStateAsync(
@@ -112,6 +112,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
                     .ToObject<Output>();
 
                 return output.GetModel<TModel>();
+                */
+                return null;
             }
             else
             {
