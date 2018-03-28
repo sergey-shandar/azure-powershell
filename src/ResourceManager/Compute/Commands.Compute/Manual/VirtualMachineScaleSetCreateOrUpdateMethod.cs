@@ -156,8 +156,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     location: Location,
                     client: _client);
 
-                var resourceGroup = ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
-
                 var noZones = _cmdlet.Zone == null || _cmdlet.Zone.Count == 0;
 
                 var publicIpAddress = resourceGroup.CreatePublicIPAddressConfig(
