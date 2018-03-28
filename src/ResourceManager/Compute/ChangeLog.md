@@ -18,11 +18,15 @@
         - Additional information about change #1
 -->
 ## Current Release
+* `New-AzureRmVm` and `New-AzureRmVmss` (simple parameter set) support availability zones.
+
+## Version 4.5.0
 * `New-AzureRmVM` and `New-AzureRmVMSS` support data disks.
 * `New-AzureRmVM` and `New-AzureRmVMSS` support custom image by name or by id.
 * Log analytic feature
     - Added `Export-AzureRmLogAnalyticRequestRateByInterval` cmdlet
     - Added `Export-AzureRmLogAnalyticThrottledRequests` cmdlet
+* Fix issue with Default Resource Group in CloudShell
 
 ## Version 4.4.0
 * `New-AzureRmVMSS` prints connection strings in verbose mode.

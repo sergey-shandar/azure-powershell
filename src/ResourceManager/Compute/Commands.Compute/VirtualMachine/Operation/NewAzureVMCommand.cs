@@ -105,6 +105,7 @@ namespace Microsoft.Azure.Commands.Compute
             Mandatory = false,
             Position = 3,
             ValueFromPipelineByPropertyName = true)]
+        [Parameter(ParameterSetName = SimpleParameterSet, Mandatory = false)]
         [ValidateNotNullOrEmpty]
         public string[] Zone { get; set; }
 
@@ -280,7 +281,9 @@ namespace Microsoft.Azure.Commands.Compute
                 var publicIpAddress = resourceGroup.CreatePublicIPAddressConfig(
                     name: _cmdlet.PublicIpAddressName,
                     domainNameLabel: _cmdlet.DomainNameLabel,
-                    allocationMethod: _cmdlet.AllocationMethod);
+                    allocationMethod: _cmdlet.AllocationMethod,
+                    sku: PublicIPAddressStrategy.Sku.Basic,
+                    zones: _cmdlet.Zone);
                 var networkSecurityGroup = resourceGroup.CreateNetworkSecurityGroupConfig(
                     name: _cmdlet.SecurityGroupName,
                     openPorts: _cmdlet.OpenPorts,
@@ -302,7 +305,8 @@ namespace Microsoft.Azure.Commands.Compute
                         admin: _cmdlet.Credential,
                         size: _cmdlet.Size,
                         availabilitySet: availabilitySet,
-                        dataDisks: _cmdlet.DataDiskSizeInGb);
+                        dataDisks: _cmdlet.DataDiskSizeInGb,
+                        zones: _cmdlet.Zone);
                 }
                 else
                 {
@@ -317,7 +321,8 @@ namespace Microsoft.Azure.Commands.Compute
                         disk: disk,
                         size: _cmdlet.Size,
                         availabilitySet: availabilitySet,
-                        dataDisks: _cmdlet.DataDiskSizeInGb);
+                        dataDisks: _cmdlet.DataDiskSizeInGb,
+                        zones: _cmdlet.Zone);
                 }
             }
         }

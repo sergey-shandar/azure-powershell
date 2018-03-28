@@ -156,10 +156,18 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     location: Location,
                     client: _client);
 
+                var resourceGroup = ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
+
+                var noZones = _cmdlet.Zone == null || _cmdlet.Zone.Count == 0;
+
                 var publicIpAddress = resourceGroup.CreatePublicIPAddressConfig(
                     name: _cmdlet.PublicIpAddressName,
                     domainNameLabel: _cmdlet.DomainNameLabel,
-                    allocationMethod: _cmdlet.AllocationMethod);
+                    allocationMethod: _cmdlet.AllocationMethod,
+                    sku: noZones 
+                        ? PublicIPAddressStrategy.Sku.Basic
+                        : PublicIPAddressStrategy.Sku.Standard,
+                    zones: null);
 
                 var virtualNetwork = resourceGroup.CreateVirtualNetworkConfig(
                     name: _cmdlet.VirtualNetworkName,
@@ -169,11 +177,13 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     _cmdlet.SubnetName, _cmdlet.SubnetAddressPrefix);
 
                 var loadBalancer = resourceGroup.CreateLoadBalancerConfig(
-                    name: _cmdlet.LoadBalancerName);
+                    name: _cmdlet.LoadBalancerName,
+                    sku: noZones
+                        ? LoadBalancerStrategy.Sku.Basic
+                        : LoadBalancerStrategy.Sku.Standard);
 
                 var frontendIpConfiguration = loadBalancer.CreateFrontendIPConfiguration(
                     name: _cmdlet.FrontendPoolName,
-                    zones: _cmdlet.Zone,
                     publicIpAddress: publicIpAddress);
 
                 var backendAddressPool = loadBalancer.CreateBackendAddressPool(
@@ -213,8 +223,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
                 return resourceGroup.CreateVirtualMachineScaleSetConfig(
                     name: _cmdlet.VMScaleSetName,
-                    subnet: subnet,
-                    frontendIpConfigurations: new[] { frontendIpConfiguration },
+                    subnet: subnet,                    
                     backendAdressPool: backendAddressPool,
                     inboundNatPools: inboundNatPools,
                     imageAndOsType: ImageAndOsType,
@@ -224,7 +233,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     upgradeMode: _cmdlet.MyInvocation.BoundParameters.ContainsKey(nameof(UpgradePolicyMode))
                         ? _cmdlet.UpgradePolicyMode
                         : (UpgradeMode?)null,
-                    dataDisks: _cmdlet.DataDiskSizeInGb);
+                    dataDisks: _cmdlet.DataDiskSizeInGb,
+                    zones: _cmdlet.Zone);
             }
         }
 
@@ -262,7 +272,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 var range =
                     FirstPortRangeStart.ToString() +
                     ".." +
-                    (FirstPortRangeStart + InstanceCount * 2).ToString();
+                    (FirstPortRangeStart + InstanceCount * 2 - 1).ToString();
 
                 asyncCmdlet.WriteVerbose(
                     Resources.VmssUseConnectionString,
