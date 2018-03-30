@@ -42,6 +42,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
             NestedResourceConfig<Subnet, VirtualNetwork> subnet,
             NestedResourceConfig<BackendAddressPool, LoadBalancer> backendAdressPool,
             IEnumerable<NestedResourceConfig<InboundNatPool, LoadBalancer>> inboundNatPools,
+            ResourceConfig<NetworkSecurityGroup> networkSecurityGroup,
             ImageAndOsType imageAndOsType,
             PSCredential admin,
             string vmSize,
@@ -104,7 +105,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                                                 .ToList()
                                         }
                                     },
-                                    Primary = true
+                                    Primary = true,
+                                    NetworkSecurityGroup = engine.GetReference(networkSecurityGroup)
                                 }
                             }
                         }
