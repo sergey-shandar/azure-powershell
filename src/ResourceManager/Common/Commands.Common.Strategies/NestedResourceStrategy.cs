@@ -20,18 +20,20 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 {
     public sealed class NestedResourceStrategy<TModel, TParentModel> : INestedResourceStrategy
     {
-        public Func<string, IEnumerable<string>> GetId { get; }
+        public string Provider { get; }
+
+        // public Func<string, IEnumerable<string>> GetId { get; }
 
         public Func<TParentModel, string, TModel> Get { get; }
 
         public Action<TParentModel, string, TModel> CreateOrUpdate { get; }
 
         public NestedResourceStrategy(
-            Func<string, IEnumerable<string>> getId,
+            string provider,
             Func<TParentModel, string, TModel> get,
             Action<TParentModel, string, TModel> createOrUpdate)
         {
-            GetId = getId;
+            Provider = provider;
             Get = get;
             CreateOrUpdate = createOrUpdate;
         }
@@ -39,6 +41,9 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 
     public static class NestedResourceStrategy
     {
+        public static IEnumerable<string> GetId(this INestedResourceStrategy strategy, string name)
+            => new[] { strategy.Provider, name };
+
         public static NestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
             string provider,
             Func<TParentModel, string, TModel> get,
@@ -46,7 +51,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             where TModel : class
             where TParentModel : class
             => new NestedResourceStrategy<TModel, TParentModel>(
-                name => new[] { provider, name},
+                provider,
                 get,
                 createOrUpdate);
 

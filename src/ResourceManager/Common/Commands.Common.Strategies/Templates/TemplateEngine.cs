@@ -14,13 +14,43 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
         }
 
         public string GetId(IEntityConfig config)
-            => "[concat(resourceGroup().id, '" + config.GetProvidersId().IdToString() + "')]";
-        /*
+        //    => "[concat(resourceGroup().id, '" + config.GetProvidersId().IdToString() + "')]";        
         {
             var res = config.Resource;
-            return "[reference(concat(" + res.Strategy.GetApiVersion( "))]";
+            return "[reference('/" 
+                + res.Strategy.Type.Namespace 
+                + "/"
+                + res.Strategy.Type.Provider
+                + "/"
+                + res.Name
+                + "', '"
+                + res.Strategy.GetApiVersion(_client) + 
+                "').id]";
         }
-        */
+
+        sealed class Visitor : IEntityConfigVisitor<TemplateEngine, string>
+        {
+            public string Visit<TModel>(ResourceConfig<TModel> config, TemplateEngine context)
+                where TModel : class
+                => "reference('/"
+                    + config.Strategy.Type.Namespace
+                    + "/"
+                    + config.Strategy.Type.Provider
+                    + "/"
+                    + config.Name
+                    + "', '"
+                    + config.Strategy.GetApiVersion(context._client) +
+                    "')";
+
+            public string Visit<TModel, TParentModel>(
+                NestedResourceConfig<TModel, TParentModel> config, TemplateEngine context)
+                where TModel : class
+                where TParentModel : class
+                => config.Parent.Accept(this, context) 
+                    + "." 
+                    + config.Strategy.Provider 
+                    + "[" + config.Name + "]";
+        }
 
         public string GetSecureString(string name, SecureString secret)
         {

@@ -16,5 +16,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 {
     public interface INestedResourceStrategy : IEntityStrategy
     {
+        string Provider { get; }
     }
 }
