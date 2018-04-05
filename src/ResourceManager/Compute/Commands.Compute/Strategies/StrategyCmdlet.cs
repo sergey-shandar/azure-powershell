@@ -41,7 +41,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
             if (parameters.AsArmTemplate)
             {
                 // create target state
-                var templateEngine = new TemplateEngine();
+                var templateEngine = new TemplateEngine(client);
                 var target = config.GetTargetState(current, templateEngine, parameters.Location);
 
                 var template = config.CreateTemplate(client, target, templateEngine);

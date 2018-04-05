@@ -6,8 +6,21 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
 {
     public class TemplateEngine : IEngine
     {
+        IClient _client { get; }
+
+        public TemplateEngine(IClient client)
+        {
+            _client = client;
+        }
+
         public string GetId(IEntityConfig config)
             => "[concat(resourceGroup().id, '" + config.GetProvidersId().IdToString() + "')]";
+        /*
+        {
+            var res = config.Resource;
+            return "[reference(concat(" + res.Strategy.GetApiVersion( "))]";
+        }
+        */
 
         public string GetSecureString(string name, SecureString secret)
         {
@@ -23,7 +36,5 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
 
         public ConcurrentDictionary<string, SecureString> SecureStrings { get; }
             = new ConcurrentDictionary<string, SecureString>();
-
-        public TemplateEngine() { }
     }
 }
