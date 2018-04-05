@@ -15,12 +15,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Templates
 
         public string GetId(IEntityConfig config)
             => "[concat(resourceGroup().id, '" + config.GetProvidersId().IdToString() + "')]";
-        /*
-        {
-            var res = config.Resource;
-            return "[reference(concat(" + res.Strategy.GetApiVersion( "))]";
-        }
-        */
 
         public string GetSecureString(string name, SecureString secret)
         {
