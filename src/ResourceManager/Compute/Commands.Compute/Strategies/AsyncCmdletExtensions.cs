@@ -34,6 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies
         {
             readonly Cmdlet _Cmdlet;
 
+            public string VerbsNew => VerbsCommon.New;
+
             public CmdletWrap(Cmdlet cmdlet)
             {
                 _Cmdlet = cmdlet;

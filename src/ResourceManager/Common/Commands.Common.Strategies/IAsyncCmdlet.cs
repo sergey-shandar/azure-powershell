@@ -25,5 +25,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         void WriteObject(object value);
 
         void ReportTaskProgress(ITaskProgress taskProgress);
+
+        string VerbsNew { get; }
     }
 }

@@ -259,8 +259,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var parameters = new Parameters(this, client);
 
-            var result = await StrategyCmdlet.RunAsync(
-                client, parameters, asyncCmdlet, new CancellationToken());
+            var result = await client.RunAsync(
+                client.SubscriptionId, parameters, asyncCmdlet, new CancellationToken());
 
             if (result != null)
             {
