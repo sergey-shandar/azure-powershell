@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                     .Values);
         }
 
-        public static async Task<TModel> GetAsync<TModel>(
+        internal static async Task<TModel> GetAsync<TModel>(
             this ResourceConfig<TModel> config,
             IClient client,
             CancellationToken cancellationToken)
@@ -80,7 +80,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
             }
         }
 
-        public static Task<TModel> CreateOrUpdateAsync<TModel>(
+        internal static Task<TModel> CreateOrUpdateAsync<TModel>(
             this ResourceConfig<TModel> config,
             IClient client,
             TModel model,
@@ -94,7 +94,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                     model,
                     cancellationToken));
 
-        public static IEnumerable<IResourceConfig> GetResourceDependencies(
+        internal static IEnumerable<IResourceConfig> GetResourceDependencies(
             this IEntityConfig config)
             => config
                 .Dependencies
@@ -102,7 +102,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
                 .Concat(config.NestedResources.SelectMany(GetResourceDependencies))
                 .Where(r => r != config);
 
-        public static string GetFullName(this IResourceConfig config)
+        internal static string GetFullName(this IResourceConfig config)
             => config.Strategy.Type.Provider + "/" + config.Name;
     }
 }

@@ -17,18 +17,18 @@ using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class EntityConfigExtensions
+    static class EntityConfigExtensions
     {
-        public static string IdToString(this IEnumerable<string> id)
+        internal static string IdToString(this IEnumerable<string> id)
             => "/" + string.Join("/", id);
 
-        public static string DefaultIdStr(this IEntityConfig config)
+        internal static string DefaultIdStr(this IEntityConfig config)
             => config.GetIdFromSubscription().IdToString();
 
-        public static string GetResourceGroupName(this IEntityConfig config)
+        internal static string GetResourceGroupName(this IEntityConfig config)
             => config.ResourceGroup?.Name ?? config.Name;
 
-        public static IEnumerable<string> GetIdFromSubscription(this IEntityConfig config)
+        internal static IEnumerable<string> GetIdFromSubscription(this IEntityConfig config)
         {
             var resourceGroupId = new[] 
             {

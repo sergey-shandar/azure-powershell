@@ -12,13 +12,12 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class TargetStateExtensions
+    static class TargetStateExtensions
     {
         public static IEnumerable<IResourceConfig> GetTargetDependencies(
             this IResourceConfig config, IState target)

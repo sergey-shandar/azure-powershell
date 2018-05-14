@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
     /// <summary>
     /// Context for asyncronous operations, such as GetAsync or CreateOrUpdateAsync.
     /// </summary>
-    public sealed class StateOperationContext
+    sealed class StateOperationContext
     {
         public IClient Client { get; }
 

@@ -16,9 +16,9 @@ namespace Microsoft.Azure.Commands.Common.Strategies
 {
     public static class ResourceId
     {
-        public const string Subscriptions = "subscriptions";
-        public const string ResourceGroups = "resourceGroups";
-        public const string Providers = "providers";
+        internal const string Subscriptions = "subscriptions";
+        internal const string ResourceGroups = "resourceGroups";
+        internal const string Providers = "providers";
 
         /// <summary>
         /// Returns 'null' if the given id is not parsable.

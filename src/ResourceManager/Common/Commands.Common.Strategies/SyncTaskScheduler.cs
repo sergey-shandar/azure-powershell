@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public sealed class SyncTaskScheduler
+    sealed class SyncTaskScheduler
     {
         readonly ConcurrentQueue<Task> _Tasks = new ConcurrentQueue<Task>();
 

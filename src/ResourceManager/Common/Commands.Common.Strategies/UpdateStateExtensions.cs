@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class UpdateStateExtensions
+    static class UpdateStateExtensions
     {
         /// <summary>
         /// 

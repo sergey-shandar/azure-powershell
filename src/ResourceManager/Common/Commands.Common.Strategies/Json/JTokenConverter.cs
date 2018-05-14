@@ -18,7 +18,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Json
 {
-    public class JTokenConverter : IConverter
+    class JTokenConverter : IConverter
     {
         public object Deserialize(Converters converters, Type type, JToken token)
             => token;

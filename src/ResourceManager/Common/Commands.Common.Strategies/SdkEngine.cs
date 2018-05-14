@@ -12,8 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
 using System.Security;
@@ -23,7 +21,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
     /// <summary>
     /// Engine for REST API calls using Azure SDK.
     /// </summary>
-    public sealed class SdkEngine : IEngine
+    sealed class SdkEngine : IEngine
     {        
         string _SubscriptionId { get; }
 

@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class LocationExtensions
+    static class LocationExtensions
     {
         /// <summary>
         /// Get the best location for the given entity from the given state.

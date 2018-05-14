@@ -16,13 +16,19 @@
   - Async support for PS
   - Template support (WIP)
 
+## Parts
+
+- [Compute/](Compute/)
+- [Extensions.cs](Extensions.cs)
+- [UniqueId.cs](UniqueId.cs)
+
+### Private
+
+- [Json/](Json/)
+
 ## Wish List
 
-### CmdLets
-
-1. `-AsArmTemplate` should work even if the user is not log in.
-
-### AutRest
+### AutoRest
 
 1. An SDK serializer
    1. should be generic and belong to a runtime library

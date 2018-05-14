@@ -21,7 +21,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Progress
     /// - Next = null.
     /// - TaskCount = 0.
     /// </summary>
-    public sealed class TimeSlot
+    sealed class TimeSlot
     {
         public int Duration { get; private set; }
 

@@ -16,7 +16,7 @@ using System;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class Property
+    static class Property
     {
         public static Property<TParent, TValue> Create<TParent, TValue>(
             Func<TParent, TValue> get, Action<TParent, TValue> set)

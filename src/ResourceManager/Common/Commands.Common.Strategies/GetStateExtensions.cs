@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class GetStateExtensions
+    static class GetStateExtensions
     {
         /// <summary>
         /// Returns a current Azure state for the given resource (config).

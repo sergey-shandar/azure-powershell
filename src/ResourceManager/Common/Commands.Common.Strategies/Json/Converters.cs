@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Json
 {
-    public class Converters
+    class Converters
     {
         readonly List<IConverter> _List = new List<IConverter>
         {   

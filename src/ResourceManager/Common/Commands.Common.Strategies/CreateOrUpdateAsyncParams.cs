@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class CreateOrUpdateAsyncParams
+    static class CreateOrUpdateAsyncParams
     {
         public static CreateOrUpdateAsyncParams<TModel> Create<TModel>(
             string resourceGroupName,

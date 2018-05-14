@@ -14,7 +14,7 @@
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class StateExtensions
+    static class StateExtensions
     {
         /// <summary>
         /// Get a model of the given nested resource config from the given state.
