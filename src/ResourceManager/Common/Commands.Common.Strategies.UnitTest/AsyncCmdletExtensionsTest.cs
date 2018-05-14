@@ -97,6 +97,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
             {
                 Assert.Equal("Str = \"str\"", message);
             }
+
+            public void WriteWarning(string message)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         [Fact]
