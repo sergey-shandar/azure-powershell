@@ -13,59 +13,61 @@
 // ----------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Cmdlets
 {
     /// <summary>
-    /// Asynchronous cmdlet interface.
+    /// An interface for a cmdlet for dependency injection.
     /// </summary>
-    public interface IAsyncCmdlet
+    public interface ICmdlet
     {
         /// <summary>
-        /// Cmdlet parameters.
+        /// Verbose output. See also PowerShell `WriteVerbose`.
         /// </summary>
-        IEnumerable<KeyValuePair<string, object>> Parameters { get; }
-
-        /// <summary>
-        /// Log additional information.
-        /// Thread-safe `WriteVerbose` function.
-        /// </summary>
-        /// <param name="message">The additional information to log</param>
+        /// <param name="message"></param>
         void WriteVerbose(string message);
 
         /// <summary>
-        /// Asynchronous, thread-safe `ShouldProcess` function.
+        /// See PowerShell `ShouldProcess`.
         /// </summary>
-        Task<bool> ShouldProcessAsync(string target, string action);
+        /// <param name="target"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        bool ShouldProcess(string target, string action);
 
         /// <summary>
-        /// Thread-safe `WriteObject` function.
+        /// See also PowerShell `WriteObject`.
         /// </summary>
         /// <param name="value"></param>
         void WriteObject(object value);
 
         /// <summary>
-        /// Thread-safe `WriteWarning` function.
+        /// See also PowerShell `WriteWarning`.
         /// </summary>
         /// <param name="message"></param>
         void WriteWarning(string message);
 
         /// <summary>
-        /// Report task progress. The function is used to report current task and cmdlet progress.
+        /// See also PowerShell `WriteProgress`.
         /// </summary>
-        /// <param name="taskProgress"></param>
-        void ReportTaskProgress(ITaskProgress taskProgress);
+        /// <param name="activity"></param>
+        /// <param name="statusDescription"></param>
+        /// <param name="currentOperation"></param>
+        /// <param name="percentComplete"></param>
+        void WriteProgress(
+            string activity,
+            string statusDescription,
+            string currentOperation,
+            int percentComplete);
 
         /// <summary>
-        /// A `New` verb.
+        /// See also `VerbsCommon.New`.
         /// </summary>
         string VerbsNew { get; }
 
         /// <summary>
-        /// Cancellation token for asynchonous operations.
+        /// Cmdlet parameters.
         /// </summary>
-        CancellationToken CancellationToken { get; }
+        IEnumerable<KeyValuePair<string, object>> Parameters { get; }
     }
 }

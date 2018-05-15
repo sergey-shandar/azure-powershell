@@ -55,15 +55,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncCmdletExtensions.cs" />
+    <Compile Include="Cmdlets\AsyncCmdletExtensions.cs" />
     <Compile Include="Compute\ImageVersion.cs" />
     <Compile Include="DependencyEngine.cs" />
-    <Compile Include="IAsyncCmdlet.cs" />
-    <Compile Include="ICmdlet.cs" />
+    <Compile Include="Cmdlets\IAsyncCmdlet.cs" />
+    <Compile Include="Cmdlets\ICmdlet.cs" />
     <Compile Include="INestedResourceConfig.cs" />
     <Compile Include="INestedResourceConfigVisitor.cs" />
     <Compile Include="INestedResourceStrategy.cs" />
-    <Compile Include="ICmdletParameters.cs" />
+    <Compile Include="Cmdlets\ICmdletParameters.cs" />
     <Compile Include="IResourceId.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Property.cs" />

@@ -5,6 +5,7 @@ using Microsoft.Rest;
 using Xunit;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using System.Threading;
+using Microsoft.Azure.Commands.Common.Strategies.Cmdlets;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
 {
