@@ -38,6 +38,8 @@ using Microsoft.Rest.Azure.OData;
 using Microsoft.Azure.Commands.ResourceManager.Common.Utilities.Models;
 using Microsoft.Azure.Management.Internal.Resources.Utilities.Models;
 using Microsoft.WindowsAzure.Commands.Utilities.Common;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Cmdlets;
 
 namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
 {
@@ -305,6 +307,11 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
 
             public ResourceConfig<ResourceGroup> CreateResourceGroup()
                 => ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
+
+            ResourceConfig<ResourceGroup> ICmdletParameters<Site, ResourceGroup>.CreateResourceGroup()
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public async Task CreateWithSimpleParameters(IAsyncCmdlet adapter)

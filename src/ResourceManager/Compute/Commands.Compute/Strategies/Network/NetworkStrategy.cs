@@ -13,6 +13,8 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
 using System;
@@ -45,7 +47,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
             where TParentModel : Resource
             => new TModel { Id = engine.GetId(config) };
 
-        public static TModel GetReference<TModel>(this IEngine engine, ResourceConfig<TModel> config)
+        public static TModel GetReference<TModel>(
+            this IEngine engine, ResourceConfig<TModel> config)
             where TModel : Resource, new()
             => new TModel { Id = engine.GetId(config) };
 

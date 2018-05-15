@@ -14,6 +14,8 @@
 using Microsoft.Azure.Management.WebSites;
 using Microsoft.Azure.Management.WebSites.Models;
 using Microsoft.Azure.Management.Internal.Resources.Models;
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.WebApps
 {

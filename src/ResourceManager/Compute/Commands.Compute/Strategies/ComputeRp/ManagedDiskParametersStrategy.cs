@@ -13,8 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies;
-using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.Commands.Compute.Models;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 using Microsoft.Azure.Management.Compute.Models;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp

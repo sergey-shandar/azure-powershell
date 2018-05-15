@@ -12,11 +12,12 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Config
 {
     /// <summary>
     /// Resource configuration. It contains information to create a resource,

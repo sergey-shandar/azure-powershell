@@ -12,6 +12,8 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Config;
+
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
     static class StateExtensions

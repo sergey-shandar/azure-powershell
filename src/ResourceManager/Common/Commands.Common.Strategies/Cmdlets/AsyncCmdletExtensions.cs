@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 using Microsoft.Azure.Commands.Common.Strategies.Json;
 using Microsoft.Azure.Commands.Common.Strategies.Templates;
 using System;

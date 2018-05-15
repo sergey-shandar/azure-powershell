@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 using Microsoft.Azure.Commands.Common.Strategies.Utilities;
 using System;
 using System.Collections.Generic;

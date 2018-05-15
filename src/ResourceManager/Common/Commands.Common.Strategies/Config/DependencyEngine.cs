@@ -12,12 +12,23 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+using System.Collections.Concurrent;
+
+namespace Microsoft.Azure.Commands.Common.Strategies.Config
 {
-    /// <summary>
-    /// Base interface for ResourceStrategy and NestedResourceStrategy classes.
-    /// </summary>
-    public interface IEntityStrategy
+    sealed class DependencyEngine : IEngine
     {
+        public ConcurrentDictionary<string, IEntityConfig> Dependencies { get; }
+            = new ConcurrentDictionary<string, IEntityConfig>();
+
+        public string GetId(IEntityConfig config)
+        {
+            var id = config.DefaultIdStr();
+            Dependencies.GetOrAdd(id, config);
+            return id;
+        }
+
+        public string GetParameterValue<T>(Parameter<T> parameter)
+            => null;
     }
 }

@@ -20,8 +20,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Microsoft.Azure.Commands.Common.Strategies;
-using System.Management.Automation;
-using System.Security;
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
 {

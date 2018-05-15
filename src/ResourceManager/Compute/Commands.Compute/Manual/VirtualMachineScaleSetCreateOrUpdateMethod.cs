@@ -31,6 +31,7 @@ using System.Threading.Tasks;
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
     using Commands.Common.Strategies.Cmdlets;
+    using Commands.Common.Strategies.Config;
     using Rm = Azure.Management.Internal.Resources.Models;
 
     public partial class NewAzureRmVmss : ComputeAutomationBaseCmdlet

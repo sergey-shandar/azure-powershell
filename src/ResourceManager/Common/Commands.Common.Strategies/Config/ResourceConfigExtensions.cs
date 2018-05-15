@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
 using Microsoft.Rest.Azure;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Config
 {
     public static class ResourceConfigExtensions
     {

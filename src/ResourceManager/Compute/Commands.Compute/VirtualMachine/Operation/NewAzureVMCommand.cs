@@ -47,6 +47,7 @@ using System.Threading.Tasks;
 using CM = Microsoft.Azure.Management.Compute.Models;
 using Microsoft.Azure.Commands.Common.Strategies.Templates;
 using Microsoft.Azure.Commands.Common.Strategies.Cmdlets;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 
 namespace Microsoft.Azure.Commands.Compute
 {

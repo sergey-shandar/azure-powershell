@@ -17,7 +17,7 @@ using Microsoft.Rest;
 using System;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Entities
 {
     public sealed class ResourceStrategy<TModel> : IResourceStrategy
     {

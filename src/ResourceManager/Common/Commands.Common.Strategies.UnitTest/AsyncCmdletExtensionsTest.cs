@@ -6,6 +6,8 @@ using Xunit;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using System.Threading;
 using Microsoft.Azure.Commands.Common.Strategies.Cmdlets;
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Config;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
 {

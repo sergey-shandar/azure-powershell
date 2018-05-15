@@ -1,4 +1,6 @@
-﻿namespace Microsoft.Azure.Commands.Common.Strategies
+﻿using Microsoft.Azure.Commands.Common.Strategies.Config;
+
+namespace Microsoft.Azure.Commands.Common.Strategies
 {
     /// <summary>
     /// Task progress.

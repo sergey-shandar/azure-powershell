@@ -12,12 +12,11 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Config
 {
-    public interface INestedResourceConfigVisitor<TParentModel, TContext, TResult>
-        where TParentModel : class
+    public interface IResourceConfigVisitor<TContext, TResult>
     {
-        TResult Visit<TModel>(NestedResourceConfig<TModel, TParentModel> config, TContext context)
+        TResult Visit<TModel>(ResourceConfig<TModel> config, TContext context)
             where TModel : class;
     }
 }

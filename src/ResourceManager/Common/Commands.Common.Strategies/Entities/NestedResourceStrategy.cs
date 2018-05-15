@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Entities
 {
     public sealed class NestedResourceStrategy<TModel, TParentModel> : INestedResourceStrategy
     {

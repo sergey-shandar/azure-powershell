@@ -12,9 +12,23 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
+
+namespace Microsoft.Azure.Commands.Common.Strategies.Config
 {
-    public interface INestedResourceStrategy : IEntityStrategy
+    public interface INestedResourceConfig : IEntityConfig
     {
+        new INestedResourceStrategy Strategy { get; }
+
+        IEntityConfig Parent { get; }
+    }
+
+    public interface INestedResourceConfig<TParentModel> : INestedResourceConfig
+        where TParentModel : class
+    {
+        new IEntityConfig<TParentModel> Parent { get; }
+
+        TResult Accept<TContext, TResult>(
+            INestedResourceConfigVisitor<TParentModel, TContext, TResult> visitor, TContext context);
     }
 }

@@ -12,9 +12,10 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Entities;
 using System.Collections.Generic;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Config
 {
     /// <summary>
     /// Base interface for ResourceConfig[TModel] and NestedResourceConfig[TModel, TParentModel].

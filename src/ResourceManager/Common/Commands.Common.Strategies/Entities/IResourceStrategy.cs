@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Common.Strategies.Entities
 {
     /// <summary>
     /// Base interface for ResourceStrategy[].
