@@ -12,9 +12,18 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+using System;
+
+namespace Microsoft.Azure.Commands.Common.Strategies.Utilities
 {
-    struct Void
+    public static class UniqueId
     {
+        public static string Create()
+            => _Create();
+
+        /// <summary>
+        /// For mocking.
+        /// </summary>
+        private static Func<string> _Create = () => Guid.NewGuid().ToString();
     }
 }
