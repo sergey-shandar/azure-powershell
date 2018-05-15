@@ -48,7 +48,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         /// <returns></returns>
         public static async Task<TModel> RunAsync<TModel, TResourceGroup>(
             this IClient client,
-            IParameters<TModel, TResourceGroup> parameters,
+            ICmdletParameters<TModel, TResourceGroup> parameters,
             IAsyncCmdlet asyncCmdlet)
             where TModel : class
             where TResourceGroup : class

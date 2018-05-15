@@ -16,15 +16,28 @@
   - Async support for PS
   - Template support (WIP)
 
-## Parts
+```C#
+interface IParameters<TModel, TResourceGroup>
+{
+
+}
+```
+
+### Changes
+
+`IParameters` => `INewCmdlet`.
+
+### Public Types
 
 - [Compute/](Compute/)
 - [Extensions.cs](Extensions.cs)
 - [UniqueId.cs](UniqueId.cs)
 
-### Private
+### Private Types
 
 - [Json/](Json/)
+- [Templates/](Templates/)
+- [Progress/](Progress/)
 
 ## Wish List
 

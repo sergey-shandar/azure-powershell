@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public interface IShouldProcess
+    interface IShouldProcess
     {
         Task<bool> ShouldCreate<TModel>(ResourceConfig<TModel> config, TModel model)
             where TModel : class;

@@ -17,10 +17,10 @@ using System.Threading.Tasks;
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
     /// <summary>
-    /// Describes Azure operation parameter and a target resource.
+    /// Describes Azure operation parameters and a target resource.
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public interface IParameters<TModel, TResourceGroup>
+    public interface ICmdletParameters<TModel, TResourceGroup>
         where TModel : class
         where TResourceGroup : class
     {

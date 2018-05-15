@@ -245,7 +245,7 @@ namespace Microsoft.Azure.Commands.Compute
             }
         }
 
-        class Parameters : IParameters<VirtualMachine, ResourceGroup>
+        class Parameters : ICmdletParameters<VirtualMachine, ResourceGroup>
         {
             NewAzureVMCommand _cmdlet { get; }
 

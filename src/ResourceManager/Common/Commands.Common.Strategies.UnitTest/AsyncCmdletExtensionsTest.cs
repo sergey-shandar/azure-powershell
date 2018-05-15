@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
 
         class RG { }
 
-        class Parameters : IParameters<RG, RG>
+        class Parameters : ICmdletParameters<RG, RG>
         {
             public string DefaultLocation => "eastus";
 
