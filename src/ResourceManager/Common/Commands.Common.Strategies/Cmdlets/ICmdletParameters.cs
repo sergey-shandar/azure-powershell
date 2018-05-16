@@ -12,7 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
 using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Common.Strategies

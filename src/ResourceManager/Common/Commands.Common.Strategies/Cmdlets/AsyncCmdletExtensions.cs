@@ -12,9 +12,9 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
 using Microsoft.Azure.Commands.Common.Strategies.Json;
-using Microsoft.Azure.Commands.Common.Strategies.Templates;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Templates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +23,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.States;
+using Microsoft.Azure.Commands.Common.Strategies.Progress;
+using Microsoft.Azure.Commands.Common.Strategies.Rm;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Cmdlets
 {

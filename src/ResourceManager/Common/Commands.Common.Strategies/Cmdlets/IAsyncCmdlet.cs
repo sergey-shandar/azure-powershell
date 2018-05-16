@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Common.Strategies.Progress;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

@@ -25,13 +25,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
     using Commands.Common.Strategies.Cmdlets;
-    using Commands.Common.Strategies.Config;
+    using Commands.Common.Strategies.Rm.Config;
     using Rm = Azure.Management.Internal.Resources.Models;
 
     public partial class NewAzureRmVmss : ComputeAutomationBaseCmdlet

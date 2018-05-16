@@ -4,8 +4,10 @@ using System.Threading;
 using Xunit;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Azure.Commands.Common.Strategies.Entities;
-using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.States;
+using Microsoft.Azure.Commands.Common.Strategies.Rm;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
 {

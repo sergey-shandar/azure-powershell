@@ -16,10 +16,10 @@ using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
 using Microsoft.Azure.Management.Internal.Resources.Models;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
-using Microsoft.Azure.Commands.Common.Strategies;
 using System.Collections.Generic;
-using Microsoft.Azure.Commands.Common.Strategies.Entities;
-using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
 {

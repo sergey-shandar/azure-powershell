@@ -37,17 +37,14 @@ using Microsoft.WindowsAzure.Commands.Tools.Vhd;
 using Microsoft.WindowsAzure.Commands.Tools.Vhd.Model;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using CM = Microsoft.Azure.Management.Compute.Models;
-using Microsoft.Azure.Commands.Common.Strategies.Templates;
 using Microsoft.Azure.Commands.Common.Strategies.Cmdlets;
-using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
 
 namespace Microsoft.Azure.Commands.Compute
 {
