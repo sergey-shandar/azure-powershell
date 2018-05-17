@@ -224,10 +224,6 @@ namespace Microsoft.Azure.Commands.Compute
         [Parameter(ParameterSetName = DiskFileParameterSet, Mandatory = false)]
         public int[] DataDiskSizeInGb { get; set; }
 
-        [Parameter(ParameterSetName = SimpleParameterSet, Mandatory = false)]
-        [Parameter(ParameterSetName = DiskFileParameterSet, Mandatory = false)]
-        public string OutputTemplateFile { get; set; }
-
         public override void ExecuteCmdlet()
         {
             switch (ParameterSetName)
@@ -263,9 +259,6 @@ namespace Microsoft.Azure.Commands.Compute
                 get { return _cmdlet.Location; }
                 set { _cmdlet.Location = value; }
             }
-
-            public string OutputTemplateFile
-                => _cmdlet.OutputTemplateFile;
 
             public string DefaultLocation => "eastus";
 

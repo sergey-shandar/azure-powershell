@@ -126,9 +126,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         [Parameter(ParameterSetName = SimpleParameterSet, Mandatory = false)]
         public int[] DataDiskSizeInGb { get; set; }
 
-        [Parameter(ParameterSetName = SimpleParameterSet, Mandatory = false)]
-        public string OutputTemplateFile { get; set; }
-
         const int FirstPortRangeStart = 50000;
 
         sealed class Parameters : ICmdletParameters<VirtualMachineScaleSet, Rm.ResourceGroup>
@@ -152,9 +149,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             public ImageAndOsType ImageAndOsType { get; set; }
 
             public string DefaultLocation => "eastus";
-
-            public string OutputTemplateFile
-                => _cmdlet.OutputTemplateFile;
 
             public async Task<ResourceConfig<VirtualMachineScaleSet>> CreateConfigAsync(
                 ResourceConfig<Rm.ResourceGroup> resourceGroup)

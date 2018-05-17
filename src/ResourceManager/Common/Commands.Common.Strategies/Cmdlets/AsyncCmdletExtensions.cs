@@ -13,8 +13,6 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
-using Microsoft.Azure.Commands.Common.Strategies.Json;
-using Microsoft.Azure.Commands.Common.Strategies.Rm.Templates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,54 +70,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Cmdlets
             foreach (var p in asyncCmdlet.Parameters)
             {
                 asyncCmdlet.WriteVerbose(p.Key + " = " + ToPowerShellString(p.Value));
-            }
-
-            if (parameters.OutputTemplateFile != null)
-            {
-                // create target state
-                var templateEngine = new TemplateEngine(client);
-
-                var emptyCurrent = new State();
-
-                var fullTarget = config.GetTargetState(
-                    emptyCurrent, templateEngine, parameters.Location);
-
-                var template = config.CreateTemplate(client, fullTarget, templateEngine);
-                template.parameters = templateEngine
-                    .Parameters
-                    .ToDictionary(
-                        kv => kv.Key,
-                        kv => kv.Value);
-                template.outputs = new Dictionary<string, Output>
-                {
-                    {
-                        "result",
-                        new Output
-                        {
-                            type = "object",
-                            value =
-                                "[reference('"
-                                + config.GetIdFromResourceGroup().IdToString() +
-                                "', '" +
-                                config.Strategy.GetApiVersion(client) +
-                                "')]"
-                        }
-                    }
-                };
-                var templateResult = new Converters().Serialize(template).ToString();
-                File.WriteAllText(parameters.OutputTemplateFile, templateResult, Encoding.UTF8);
-
-                /*
-                // deployment
-                return await DeployTemplateAsync(
-                    client,
-                    asyncCmdlet,
-                    resourceGroup,
-                    fullTarget,
-                    templateEngine,
-                    template,
-                    config);
-                    */
             }
 
             var engine = new SdkEngine(client.SubscriptionId);
