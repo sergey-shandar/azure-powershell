@@ -2,8 +2,8 @@
 
 - public extensions vs private extensions
 - public extensions in a simple common namespace
-- no Utilities namespace
-- move UniqueId to Compute and make private.
+- [X] no Utilities namespace
+- [X] move UniqueId to Compute and make private.
 - move Compute to Compute.
 - ResourceConfig => IResourceConfig
 - NestedResourceConfig => INestedResourceConfig

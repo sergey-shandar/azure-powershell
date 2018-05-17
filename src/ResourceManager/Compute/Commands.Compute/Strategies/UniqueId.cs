@@ -14,9 +14,9 @@
 
 using System;
 
-namespace Microsoft.Azure.Commands.Common.Strategies
+namespace Microsoft.Azure.Commands.Compute.Strategies
 {
-    public static class UniqueId
+    static class UniqueId
     {
         public static string Create()
             => _Create();
@@ -24,6 +24,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         /// <summary>
         /// For mocking.
         /// </summary>
-        private static Func<string> _Create = () => Guid.NewGuid().ToString();
+        public static Func<string> _Create = () => Guid.NewGuid().ToString();
     }
 }

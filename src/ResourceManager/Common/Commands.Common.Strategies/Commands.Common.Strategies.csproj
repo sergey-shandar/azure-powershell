@@ -99,7 +99,6 @@
     <Compile Include="Rm\States\StateOperationContext.cs" />
     <Compile Include="Cmdlets\SyncTaskScheduler.cs" />
     <Compile Include="Progress\TimeSlotExtensions.cs" />
-    <Compile Include="UniqueId.cs" />
     <Compile Include="Rm\States\UpdateStateExtensions.cs" />
     <Compile Include="Rm\Entities\CreateOrUpdateAsyncParams.cs" />
     <Compile Include="Rm\Config\EntityConfigExtensions.cs" />
