@@ -64,7 +64,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
 
         class AsyncCmdlet : IAsyncCmdlet
         {
-            public CancellationToken CancellationToken { get; } 
+            public CancellationToken CancellationToken { get; }
                 = new CancellationToken();
 
             public IEnumerable<KeyValuePair<string, object>> Parameters
