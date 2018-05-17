@@ -1,5 +1,4 @@
 ﻿using Microsoft.Azure.Commands.Common.Strategies;
-using Microsoft.Azure.Commands.Common.Strategies.Utilities;
 using Microsoft.Azure.Management.Compute.Models;
 using System;
 using System.Collections.Generic;

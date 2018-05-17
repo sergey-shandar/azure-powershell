@@ -66,7 +66,7 @@
     <Compile Include="Cmdlets\ICmdletParameters.cs" />
     <Compile Include="Rm\IResourceId.cs" />
     <Compile Include="Rm\Parameter.cs" />
-    <Compile Include="Utilities\Property.cs" />
+    <Compile Include="Property.cs" />
     <Compile Include="Rm\ResourceId.cs" />
     <Compile Include="Rm\ResourceType.cs" />
     <Compile Include="Rm\SdkEngine.cs" />
@@ -99,11 +99,11 @@
     <Compile Include="Rm\States\StateOperationContext.cs" />
     <Compile Include="Cmdlets\SyncTaskScheduler.cs" />
     <Compile Include="Progress\TimeSlotExtensions.cs" />
-    <Compile Include="Utilities\UniqueId.cs" />
+    <Compile Include="UniqueId.cs" />
     <Compile Include="Rm\States\UpdateStateExtensions.cs" />
     <Compile Include="Rm\Entities\CreateOrUpdateAsyncParams.cs" />
     <Compile Include="Rm\Config\EntityConfigExtensions.cs" />
-    <Compile Include="Utilities\CollectionExtensions.cs" />
+    <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Rm\States\GetStateExtensions.cs" />
     <Compile Include="Rm\Entities\GetAsyncParams.cs" />
     <Compile Include="Rm\IClient.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="Rm\Entities\ResourceStrategy.cs" />
     <Compile Include="Rm\States\State.cs" />
     <Compile Include="Rm\LocationExtensions.cs" />
-    <Compile Include="Utilities\Void.cs" />
+    <Compile Include="Void.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MSSharedLibKey.snk" />
