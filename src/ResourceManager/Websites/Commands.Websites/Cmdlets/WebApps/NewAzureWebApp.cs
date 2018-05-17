@@ -30,15 +30,13 @@ using Microsoft.Azure.Commands.Common.Strategies.Resources;
 using Microsoft.Azure.Commands.Common.Strategies.WebApps;
 using Microsoft.Azure.Commands.Common.Strategies;
 using Microsoft.Azure.Commands.WebApps.Strategies;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using Microsoft.Azure.Commands.WebApps.Properties;
 using Microsoft.Rest.Azure.OData;
 using Microsoft.Azure.Commands.ResourceManager.Common.Utilities.Models;
 using Microsoft.Azure.Management.Internal.Resources.Utilities.Models;
 using Microsoft.WindowsAzure.Commands.Utilities.Common;
-using Microsoft.Azure.Commands.Common.Strategies.Config;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
 using Microsoft.Azure.Commands.Common.Strategies.Cmdlets;
 
 namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
