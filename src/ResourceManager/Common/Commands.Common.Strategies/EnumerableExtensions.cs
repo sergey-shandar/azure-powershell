@@ -12,34 +12,14 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public static class CollectionExtensions
+    public static class EnumerableExtensions
     {
         public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> v)
             => v ?? Enumerable.Empty<T>();
-
-        internal static TValue GetOrNull<TKey, TValue>(
-            this IDictionary<TKey, TValue> dictionary, TKey key)
-            where TValue : class
-        {
-            if (key == null)
-            {
-                return null;
-            }
-            TValue result;
-            dictionary.TryGetValue(key, out result);
-            return result;
-        }
-
-        internal static T GetOrAddWithCast<TKey, T, TBase>(
-            this ConcurrentDictionary<TKey, TBase> dictionary, TKey key, Func<T> add)
-            where T : TBase
-            => (T)dictionary.GetOrAdd(key, _ => add());
     }
 }

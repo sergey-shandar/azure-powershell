@@ -12,8 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies;
-using Microsoft.Azure.Commands.Common.Strategies.Compute;
 using Microsoft.Azure.Commands.Common.Strategies.Rm;
 using Microsoft.Azure.Commands.Compute.Properties;
 using Microsoft.Azure.Management.Compute;

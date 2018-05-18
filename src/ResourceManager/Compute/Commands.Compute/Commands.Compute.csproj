@@ -276,6 +276,7 @@
     <Compile Include="Strategies\ComputeRp\ImageEx.cs" />
     <Compile Include="Strategies\ComputeRp\Images.cs" />
     <Compile Include="Strategies\ComputeRp\ApiEntityReferenceStrategy.cs" />
+    <Compile Include="Strategies\ComputeRp\ImageVersion.cs" />
     <Compile Include="Strategies\ComputeRp\LinuxConfigurationStrategy.cs" />
     <Compile Include="Strategies\ComputeRp\ManagedDiskParametersStrategy.cs" />
     <Compile Include="Strategies\ComputeRp\NetworkInterfaceReferenceStrategy.cs" />

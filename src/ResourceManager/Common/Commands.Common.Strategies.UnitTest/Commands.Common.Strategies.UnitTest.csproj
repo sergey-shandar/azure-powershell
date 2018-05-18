@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncCmdletExtensionsTest.cs" />
-    <Compile Include="Compute\ImageVersionTest.cs" />
     <Compile Include="Json\JsonTest.cs" />
     <Compile Include="Json\TypedObjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

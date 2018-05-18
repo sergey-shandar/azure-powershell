@@ -12,27 +12,30 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies.Compute;
-using Microsoft.WindowsAzure.Commands.ScenarioTest;
-using Xunit;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest.Compute
+namespace Microsoft.Azure.Commands.Common.Strategies
 {
-    public class ImageVersionTest
+    internal static class DictionaryExtensions
     {
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void CompareToTest()
+        internal static TValue GetOrNull<TKey, TValue>(
+            this IDictionary<TKey, TValue> dictionary, TKey key)
+            where TValue : class
         {
-            var a = ImageVersion.Parse("1.23.456");
-            var b = ImageVersion.Parse("1.23");
-            var c = ImageVersion.Parse("01.023");
-            var d = ImageVersion.Parse("1.23.457");
-            Assert.Equal(1, a.CompareTo(b));
-            Assert.Equal(-1, b.CompareTo(a));
-            Assert.Equal(0, b.CompareTo(c));
-            Assert.Equal(-1, a.CompareTo(d));
-            Assert.Equal(1, d.CompareTo(a));
+            if (key == null)
+            {
+                return null;
+            }
+            TValue result;
+            dictionary.TryGetValue(key, out result);
+            return result;
         }
+
+        internal static T GetOrAddWithCast<TKey, T, TBase>(
+            this ConcurrentDictionary<TKey, TBase> dictionary, TKey key, Func<T> add)
+            where T : TBase
+            => (T)dictionary.GetOrAdd(key, _ => add());
     }
 }

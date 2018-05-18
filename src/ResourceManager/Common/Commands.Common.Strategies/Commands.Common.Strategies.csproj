@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cmdlets\AsyncCmdletExtensions.cs" />
-    <Compile Include="Compute\ImageVersion.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="Rm\Config\DependencyEngine.cs" />
     <Compile Include="Cmdlets\IAsyncCmdlet.cs" />
     <Compile Include="Cmdlets\ICmdlet.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Rm\States\UpdateStateExtensions.cs" />
     <Compile Include="Rm\Entities\CreateOrUpdateAsyncParams.cs" />
     <Compile Include="Rm\Config\EntityConfigExtensions.cs" />
-    <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Rm\States\GetStateExtensions.cs" />
     <Compile Include="Rm\Entities\GetAsyncParams.cs" />
     <Compile Include="Rm\IClient.cs" />

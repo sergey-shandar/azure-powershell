@@ -1,15 +1,15 @@
 ﻿# Strategies
 
-- public extensions vs private extensions
-- public extensions in a simple common namespace
+- [X] partly done, public extensions vs private extensions
+- [X] partly done, public extensions in a simple common namespace
 - [X] no Utilities namespace
 - [X] move UniqueId to Compute and make private.
-- move Compute to Compute.
+- [X] move Compute to Compute.
 - ResourceConfig => IResourceConfig
 - NestedResourceConfig => INestedResourceConfig
 - ResourceStrategy => IResourceStrategy
 - NestedResourceStrategy => IResourceStrategy
-- template abstractions / dependency injection.
+- [X] partly done (removed), template abstractions / dependency injection.
 
 ## Future
 
