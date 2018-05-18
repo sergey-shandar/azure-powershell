@@ -21,7 +21,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class SubnetStrategy
     {
-        public static NestedResourceStrategy<Subnet, VirtualNetwork> Strategy { get; }
+        public static INestedResourceStrategy<Subnet, VirtualNetwork> Strategy { get; }
             = NestedResourceStrategy.Create<Subnet, VirtualNetwork>(
                 provider: "subnets",
                 getList: parentModel => parentModel.Subnets,

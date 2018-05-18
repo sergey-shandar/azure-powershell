@@ -18,40 +18,40 @@ using System.Linq;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
 {
-    public sealed class NestedResourceStrategy<TModel, TParentModel> :
-        INestedResourceStrategy<TModel, TParentModel>
-    {
-        public Func<string, IEnumerable<string>> GetId { get; }
-
-        public Func<TParentModel, string, TModel> Get { get; }
-
-        public Action<TParentModel, string, TModel> CreateOrUpdate { get; }
-
-        public NestedResourceStrategy(
-            Func<string, IEnumerable<string>> getId,
-            Func<TParentModel, string, TModel> get,
-            Action<TParentModel, string, TModel> createOrUpdate)
-        {
-            GetId = getId;
-            Get = get;
-            CreateOrUpdate = createOrUpdate;
-        }
-    }
-
     public static class NestedResourceStrategy
     {
-        public static NestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
+        sealed class Implementation<TModel, TParentModel> :
+            INestedResourceStrategy<TModel, TParentModel>
+        {
+            public Func<string, IEnumerable<string>> GetId { get; }
+
+            public Func<TParentModel, string, TModel> Get { get; }
+
+            public Action<TParentModel, string, TModel> CreateOrUpdate { get; }
+
+            public Implementation(
+                Func<string, IEnumerable<string>> getId,
+                Func<TParentModel, string, TModel> get,
+                Action<TParentModel, string, TModel> createOrUpdate)
+            {
+                GetId = getId;
+                Get = get;
+                CreateOrUpdate = createOrUpdate;
+            }
+        }
+
+        public static INestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
             string provider,
             Func<TParentModel, string, TModel> get,
             Action<TParentModel, string, TModel> createOrUpdate)
             where TModel : class
             where TParentModel : class
-            => new NestedResourceStrategy<TModel, TParentModel>(
+            => new Implementation<TModel, TParentModel>(
                 name => new[] { provider, name},
                 get,
                 createOrUpdate);
 
-        public static NestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
+        public static INestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
             string provider,
             Func<TParentModel, IList<TModel>> getList,
             Action<TParentModel, IList<TModel>> setList,

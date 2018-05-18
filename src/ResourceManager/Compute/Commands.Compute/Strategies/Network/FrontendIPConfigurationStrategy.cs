@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class FrontendIPConfigurationStrategy
     {
-        public static NestedResourceStrategy<FrontendIPConfiguration, LoadBalancer> Strategy { get; }
+        public static INestedResourceStrategy<FrontendIPConfiguration, LoadBalancer> Strategy { get; }
             = NestedResourceStrategy.Create<FrontendIPConfiguration, LoadBalancer>(
                 provider: "frontendIPConfigurations",
                 getList: parentModel => parentModel.FrontendIPConfigurations,

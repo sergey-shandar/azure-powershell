@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class LoadBalancingRuleStrategy
     {
-        public static NestedResourceStrategy<LoadBalancingRule, LoadBalancer> Strategy { get; }
+        public static INestedResourceStrategy<LoadBalancingRule, LoadBalancer> Strategy { get; }
             = NestedResourceStrategy.Create<LoadBalancingRule, LoadBalancer>(
                 provider: "loadBalancingRules",
                 getList: parentModel => parentModel.LoadBalancingRules,

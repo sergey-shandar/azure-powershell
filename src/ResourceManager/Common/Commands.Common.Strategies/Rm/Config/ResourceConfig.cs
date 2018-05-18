@@ -75,7 +75,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
                 : new[] { Strategy.Type.Namespace, Strategy.Type.Provider, Name };
 
         public NestedResourceConfig<TNestedModel, TModel> CreateNested<TNestedModel>(
-            NestedResourceStrategy<TNestedModel, TModel> strategy,
+            INestedResourceStrategy<TNestedModel, TModel> strategy,
             string name,
             Func<IEngine, TNestedModel> createModel = null)
             where TNestedModel : class, new()

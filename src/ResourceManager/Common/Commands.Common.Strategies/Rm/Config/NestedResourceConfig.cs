@@ -30,7 +30,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
         where TModel : class
         where TParenModel : class
     {
-        public NestedResourceStrategy<TModel, TParenModel> Strategy { get; }
+        public INestedResourceStrategy<TModel, TParenModel> Strategy { get; }
 
         public string Name { get; }
 
@@ -67,7 +67,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
 
         public NestedResourceConfig(
             IEntityConfig<TParenModel> parent,
-            NestedResourceStrategy<TModel, TParenModel> strategy,
+            INestedResourceStrategy<TModel, TParenModel> strategy,
             string name,
             Func<IEngine, TModel> createModel,
             IEnumerable<IEntityConfig> dependencies)

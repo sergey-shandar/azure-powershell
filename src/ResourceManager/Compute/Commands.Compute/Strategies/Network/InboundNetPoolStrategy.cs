@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class InboundNetPoolStrategy
     {
-        public static NestedResourceStrategy<InboundNatPool, LoadBalancer> Strategy { get; }
+        public static INestedResourceStrategy<InboundNatPool, LoadBalancer> Strategy { get; }
             = NestedResourceStrategy.Create<InboundNatPool, LoadBalancer>(
                 provider: "inboundNatPools",
                 getList: b => b.InboundNatPools,

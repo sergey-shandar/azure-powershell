@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class BackendAddressPoolStrategy
     {
-        public static NestedResourceStrategy<BackendAddressPool, LoadBalancer> Strategy { get; }
+        public static INestedResourceStrategy<BackendAddressPool, LoadBalancer> Strategy { get; }
             = NestedResourceStrategy.Create<BackendAddressPool, LoadBalancer>(
                 provider: "backendAddressPools",
                 getList: parentModel => parentModel.BackendAddressPools,

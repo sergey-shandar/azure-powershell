@@ -12,6 +12,9 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
 {
     public interface INestedResourceStrategy : IEntityStrategy
@@ -20,5 +23,10 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
 
     public interface INestedResourceStrategy<TModel, TParentModel> : INestedResourceStrategy
     {
+        Func<string, IEnumerable<string>> GetId { get; }
+
+        Func<TParentModel, string, TModel> Get { get; }
+
+        Action<TParentModel, string, TModel> CreateOrUpdate { get; }
     }
 }
