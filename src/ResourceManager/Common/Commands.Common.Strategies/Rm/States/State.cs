@@ -13,7 +13,6 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
-using Microsoft.Azure.Commands.Common.Strategies.Utilities;
 using System;
 using System.Collections.Concurrent;
 

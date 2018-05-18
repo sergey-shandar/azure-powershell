@@ -12,7 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies.Utilities;
 using Microsoft.Rest;
 using System;
 using System.Threading.Tasks;

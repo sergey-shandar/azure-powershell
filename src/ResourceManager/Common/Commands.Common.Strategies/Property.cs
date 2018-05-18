@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Utilities
+namespace Microsoft.Azure.Commands.Common.Strategies
 {
     public static class Property
     {
