@@ -17,4 +17,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
     public interface INestedResourceStrategy : IEntityStrategy
     {
     }
+
+    public interface INestedResourceStrategy<TModel, TParentModel> : INestedResourceStrategy
+    {
+    }
 }
