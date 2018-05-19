@@ -24,7 +24,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class NetworkSecurityGroupStrategy
     {
-        public static ResourceStrategy<NetworkSecurityGroup> Strategy { get; }
+        public static IResourceStrategy<NetworkSecurityGroup> Strategy { get; }
             = NetworkStrategy.Create(
                 provider: "networkSecurityGroups",
                 getOperations: client => client.NetworkSecurityGroups,

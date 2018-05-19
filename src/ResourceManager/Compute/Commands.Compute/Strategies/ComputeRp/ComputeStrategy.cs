@@ -26,7 +26,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
     {
         public const string Namespace = "Microsoft.Compute";
 
-        public static ResourceStrategy<TModel> Create<TModel, TOperations>(
+        public static IResourceStrategy<TModel> Create<TModel, TOperations>(
             string provider,
             Func<ComputeManagementClient, TOperations> getOperations,
             Func<TOperations, GetAsyncParams, Task<TModel>> getAsync,

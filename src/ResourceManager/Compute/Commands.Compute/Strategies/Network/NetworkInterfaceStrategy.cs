@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class NetworkInterfaceStrategy
     {
-        public static ResourceStrategy<NetworkInterface> Strategy { get; }
+        public static IResourceStrategy<NetworkInterface> Strategy { get; }
             = NetworkStrategy.Create(
                 provider: "networkInterfaces",
                 getOperations: client => client.NetworkInterfaces,

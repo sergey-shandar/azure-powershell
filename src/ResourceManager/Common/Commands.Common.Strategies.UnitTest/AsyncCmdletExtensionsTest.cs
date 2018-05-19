@@ -15,7 +15,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
 {
     public class AsyncCmdletExtensionsTest
     {
-        class Client : IClient
+        class Client : ServiceClient<Client>, IClient
         {
             public string SubscriptionId => "subscription";
 
@@ -44,12 +44,15 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
             public string OutputTemplateFile
                 => null;
 
-            public async Task<ResourceConfig<RG>> CreateConfigAsync(ResourceConfig<RG> resourceGroupConfig)
+            public async Task<ResourceConfig<RG>> CreateConfigAsync(
+                ResourceConfig<RG> resourceGroupConfig)
                 => new ResourceConfig<RG>(
-                    new ResourceStrategy<RG>(
+                    ResourceStrategy.Create<RG, Client, Client>(
                         null,
                         null,
+                        c => c, 
                         async (c, p) => new RG(),
+                        null,
                         null,
                         null,
                         null),

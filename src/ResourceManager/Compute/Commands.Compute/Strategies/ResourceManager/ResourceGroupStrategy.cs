@@ -12,7 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies;
 using Microsoft.Azure.Commands.Common.Strategies.Rm;
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
@@ -23,7 +22,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ResourceManager
 {
     static class ResourceGroupStrategy
     {
-        public static ResourceStrategy<ResourceGroup> Strategy { get; }
+        public static IResourceStrategy<ResourceGroup> Strategy { get; }
             = ResourceStrategy.Create(
                 type: ResourceType.ResourceGroup,
                 getApiVersion: (ResourceManagementClient client) => client.ApiVersion,

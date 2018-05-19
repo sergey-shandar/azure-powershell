@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
 {
@@ -27,5 +28,16 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
         /// Returns an API version.
         /// </summary>
         Func<IClient, string> GetApiVersion { get; }
+    }
+
+    public interface IResourceStrategy<TModel> : IResourceStrategy
+    {
+        Func<IClient, GetAsyncParams, Task<TModel>> GetAsync { get; }
+
+        Func<IClient, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> CreateOrUpdateAsync { get; }
+
+        Property<TModel, string> Location { get; }
+
+        Func<TModel, int> CreateTime { get; }
     }
 }

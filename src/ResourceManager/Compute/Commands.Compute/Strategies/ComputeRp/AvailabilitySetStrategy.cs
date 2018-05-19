@@ -24,7 +24,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
 {
     static class AvailabilitySetStrategy
     {
-        public static ResourceStrategy<AvailabilitySet> Strategy { get; }
+        public static IResourceStrategy<AvailabilitySet> Strategy { get; }
             = ComputeStrategy.Create(
                 provider: "availabilitySets",
                 getOperations: client => client.AvailabilitySets,

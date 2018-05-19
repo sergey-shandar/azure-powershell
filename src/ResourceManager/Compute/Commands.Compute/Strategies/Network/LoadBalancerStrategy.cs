@@ -26,7 +26,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
         public const string Dynamic = "Dynamic";
         public const string Static = "Static";
 
-        public static ResourceStrategy<LoadBalancer> Strategy { get; }
+        public static IResourceStrategy<LoadBalancer> Strategy { get; }
             = NetworkStrategy.Create(
                 "loadBalancers",
                 client => client.LoadBalancers,

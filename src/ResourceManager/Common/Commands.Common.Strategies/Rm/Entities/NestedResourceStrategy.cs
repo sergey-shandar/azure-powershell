@@ -20,27 +20,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
 {
     public static class NestedResourceStrategy
     {
-        sealed class Implementation<TModel, TParentModel> :
-            INestedResourceStrategy<TModel, TParentModel>
-        {
-            public Func<string, IEnumerable<string>> GetId { get; }
-
-            public Func<TParentModel, string, TModel> Get { get; }
-
-            public Action<TParentModel, string, TModel> CreateOrUpdate { get; }
-
-            public Implementation(
-                Func<string, IEnumerable<string>> getId,
-                Func<TParentModel, string, TModel> get,
-                Action<TParentModel, string, TModel> createOrUpdate)
-            {
-                GetId = getId;
-                Get = get;
-                CreateOrUpdate = createOrUpdate;
-            }
-        }
-
-        public static INestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
+        static INestedResourceStrategy<TModel, TParentModel> Create<TModel, TParentModel>(
             string provider,
             Func<TParentModel, string, TModel> get,
             Action<TParentModel, string, TModel> createOrUpdate)
@@ -83,5 +63,25 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
                     }
                     list.Add(model);
                 });
+
+        sealed class Implementation<TModel, TParentModel> :
+            INestedResourceStrategy<TModel, TParentModel>
+        {
+            public Func<string, IEnumerable<string>> GetId { get; }
+
+            public Func<TParentModel, string, TModel> Get { get; }
+
+            public Action<TParentModel, string, TModel> CreateOrUpdate { get; }
+
+            public Implementation(
+                Func<string, IEnumerable<string>> getId,
+                Func<TParentModel, string, TModel> get,
+                Action<TParentModel, string, TModel> createOrUpdate)
+            {
+                GetId = getId;
+                Get = get;
+                CreateOrUpdate = createOrUpdate;
+            }
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class PublicIPAddressStrategy
     {
-        public static ResourceStrategy<PublicIPAddress> Strategy { get; }
+        public static IResourceStrategy<PublicIPAddress> Strategy { get; }
             = NetworkStrategy.Create(
                 provider: "publicIPAddresses",
                 getOperations: client => client.PublicIPAddresses,

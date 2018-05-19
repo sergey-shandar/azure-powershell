@@ -23,7 +23,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class VirtualNetworkStrategy
     {
-        public static ResourceStrategy<VirtualNetwork> Strategy { get; }
+        public static IResourceStrategy<VirtualNetwork> Strategy { get; }
             = NetworkStrategy.Create(
                 provider: "virtualNetworks",
                 getOperations: client => client.VirtualNetworks,

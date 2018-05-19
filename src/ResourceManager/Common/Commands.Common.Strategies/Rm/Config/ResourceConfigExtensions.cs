@@ -26,7 +26,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     public static class ResourceConfigExtensions
     {
         public static ResourceConfig<TModel> CreateResourceConfig<TModel>(
-            this ResourceStrategy<TModel> strategy,
+            this IResourceStrategy<TModel> strategy,
             IResourceConfig resourceGroup,
             string name,
             Func<IEngine, TModel> createModel,
@@ -42,7 +42,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
                     .Where(v => v != null));
 
         public static ResourceConfig<TModel> CreateResourceConfig<TModel>(
-            this ResourceStrategy<TModel> strategy,
+            this IResourceStrategy<TModel> strategy,
             IResourceConfig resourceGroup,
             string name,
             Func<IEngine, TModel> createModel = null)

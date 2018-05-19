@@ -27,7 +27,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     public sealed class ResourceConfig<TModel> : IEntityConfig<TModel>, IResourceConfig
         where TModel : class
     {
-        public ResourceStrategy<TModel> Strategy { get; }
+        public IResourceStrategy<TModel> Strategy { get; }
 
         // It has to be ResourceConfig<ResourceGroup>.
         public IResourceConfig ResourceGroup { get; }
@@ -56,7 +56,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
             => _NestedResources;
 
         public ResourceConfig(
-            ResourceStrategy<TModel> strategy,
+            IResourceStrategy<TModel> strategy,
             IResourceConfig resourceGroup,
             string name,
             Func<IEngine, TModel> createModel,

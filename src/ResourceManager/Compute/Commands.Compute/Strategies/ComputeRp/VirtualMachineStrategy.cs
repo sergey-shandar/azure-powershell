@@ -25,7 +25,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
 {
     static class VirtualMachineStrategy
     {
-        public static ResourceStrategy<VirtualMachine> Strategy { get; }
+        public static IResourceStrategy<VirtualMachine> Strategy { get; }
             = ComputeStrategy.Create(
                 provider: "virtualMachines",
                 getOperations: client => client.VirtualMachines,

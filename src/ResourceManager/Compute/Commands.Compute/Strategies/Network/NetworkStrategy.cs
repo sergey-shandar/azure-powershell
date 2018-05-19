@@ -25,7 +25,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
 {
     static class NetworkStrategy
     {
-        public static ResourceStrategy<TModel> Create<TModel, TOperations>(
+        public static IResourceStrategy<TModel> Create<TModel, TOperations>(
             string provider,
             Func<NetworkManagementClient, TOperations> getOperations,
             Func<TOperations, GetAsyncParams, Task<TModel>> getAsync,
