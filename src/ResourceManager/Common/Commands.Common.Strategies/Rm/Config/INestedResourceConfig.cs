@@ -31,4 +31,12 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
         TResult Accept<TContext, TResult>(
             INestedResourceConfigVisitor<TParentModel, TContext, TResult> visitor, TContext context);
     }
+
+    public interface INestedResourceConfig<TParentModel, TModel> :
+        INestedResourceConfig<TParentModel>,
+        IEntityConfig<TModel>
+        where TParentModel : class
+        where TModel : class
+    {
+    }
 }

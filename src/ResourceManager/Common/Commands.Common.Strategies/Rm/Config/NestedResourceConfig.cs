@@ -25,8 +25,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     /// <typeparam name="TModel"></typeparam>
     /// <typeparam name="TParenModel"></typeparam>
     public sealed class NestedResourceConfig<TModel, TParenModel> : 
-        INestedResourceConfig<TParenModel>,
-        IEntityConfig<TModel>
+        INestedResourceConfig<TParenModel, TModel>
         where TModel : class
         where TParenModel : class
     {
