@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
             where TModel : class;
 
         TResult Visit<TModel, TParentModel>(
-            NestedResourceConfig<TModel, TParentModel> config, TContext context)
+            INestedResourceConfig<TModel, TParentModel> config, TContext context)
             where TModel : class
             where TParentModel : class;
     }
@@ -31,7 +31,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
         TResult Visit(ResourceConfig<TModel> config, TContext context);
 
         TResult Visit<TParentModel>(
-            NestedResourceConfig<TModel, TParentModel> config, TContext context)
+            INestedResourceConfig<TModel, TParentModel> config, TContext context)
             where TParentModel : class;
     }
 }

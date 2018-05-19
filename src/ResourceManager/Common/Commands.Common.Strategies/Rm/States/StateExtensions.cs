@@ -63,7 +63,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
                 => state.Get(config);
 
             public TModel Visit<TParentModel>(
-                NestedResourceConfig<TModel, TParentModel> config, IState state)
+                INestedResourceConfig<TModel, TParentModel> config, IState state)
                 where TParentModel : class
                 => state.Get(config);
         }
@@ -75,7 +75,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
                 => context.Contains(config);
 
             public bool Visit<TModel, TParentModel>(
-                NestedResourceConfig<TModel, TParentModel> config, IState context)
+                INestedResourceConfig<TModel, TParentModel> config, IState context)
                 where TModel : class
                 where TParentModel : class
                 => context.Contains(config);

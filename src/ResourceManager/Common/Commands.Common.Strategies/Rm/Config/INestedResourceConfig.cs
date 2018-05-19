@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using System;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
 {
@@ -32,11 +33,14 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
             INestedResourceConfigVisitor<TParentModel, TContext, TResult> visitor, TContext context);
     }
 
-    public interface INestedResourceConfig<TParentModel, TModel> :
+    public interface INestedResourceConfig<TModel, TParentModel> :
         INestedResourceConfig<TParentModel>,
         IEntityConfig<TModel>
         where TParentModel : class
         where TModel : class
     {
+        Func<IEngine, TModel> CreateModel { get; }
+
+        new INestedResourceStrategy<TModel, TParentModel> Strategy { get; }
     }
 }

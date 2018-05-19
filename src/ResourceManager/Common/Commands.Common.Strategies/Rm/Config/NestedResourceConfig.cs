@@ -24,8 +24,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     /// <typeparam name="TParenModel"></typeparam>
-    public sealed class NestedResourceConfig<TModel, TParenModel> : 
-        INestedResourceConfig<TParenModel, TModel>
+    sealed class NestedResourceConfig<TModel, TParenModel> : 
+        INestedResourceConfig<TModel, TParenModel>
         where TModel : class
         where TParenModel : class
     {
@@ -95,7 +95,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
             INestedResourceConfigVisitor<TParenModel, TContext, TResult> visitor, TContext context)
             => visitor.Visit(this, context);
 
-        void IEntityConfig<TModel>.AddNested<TNestedModel>(NestedResourceConfig<TNestedModel, TModel> config)
+        void IEntityConfig<TModel>.AddNested<TNestedModel>(
+            INestedResourceConfig<TNestedModel, TModel> config)
             => _NestedResources.Add(config);
     }
 }

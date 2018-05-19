@@ -117,7 +117,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
             }
 
             public void SetNestedModel<TModel>(
-                NestedResourceConfig<TModel, TParentModel> config)
+                INestedResourceConfig<TModel, TParentModel> config)
                 where TModel : class
             {
                 var model = config.CreateModel(Context.Engine);
@@ -130,7 +130,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
             where TParentModel : class
         {
             public Void Visit<TModel>(
-                NestedResourceConfig<TModel, TParentModel> config,
+                INestedResourceConfig<TModel, TParentModel> config,
                 NestedResourceContext<TParentModel> context)
                 where TModel : class
             {
