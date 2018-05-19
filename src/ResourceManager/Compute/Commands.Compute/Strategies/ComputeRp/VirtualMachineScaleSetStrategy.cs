@@ -40,9 +40,9 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
         internal static ResourceConfig<VirtualMachineScaleSet> CreateVirtualMachineScaleSetConfig(
             this ResourceConfig<ResourceGroup> resourceGroup,
             string name,
-            NestedResourceConfig<Subnet, VirtualNetwork> subnet,
-            NestedResourceConfig<BackendAddressPool, LoadBalancer> backendAdressPool,
-            IEnumerable<NestedResourceConfig<InboundNatPool, LoadBalancer>> inboundNatPools,
+            INestedResourceConfig<Subnet, VirtualNetwork> subnet,
+            INestedResourceConfig<BackendAddressPool, LoadBalancer> backendAdressPool,
+            IEnumerable<INestedResourceConfig<InboundNatPool, LoadBalancer>> inboundNatPools,
             ResourceConfig<NetworkSecurityGroup> networkSecurityGroup,
             ImageAndOsType imageAndOsType,
             Credential credential,

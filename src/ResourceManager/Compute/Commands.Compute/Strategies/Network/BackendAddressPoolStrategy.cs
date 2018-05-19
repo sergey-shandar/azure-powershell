@@ -28,7 +28,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 getName: model => model.Name,
                 setName: (model, name) => model.Name = name);
 
-        public static NestedResourceConfig<BackendAddressPool, LoadBalancer> CreateBackendAddressPool(
+        public static INestedResourceConfig<BackendAddressPool, LoadBalancer> CreateBackendAddressPool(
             this ResourceConfig<LoadBalancer> loadBalancer,
             string name)
             => loadBalancer.CreateNested(

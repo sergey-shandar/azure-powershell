@@ -28,11 +28,11 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 getName: model => model.Name,
                 setName: (model, name) => model.Name = name);
 
-        public static NestedResourceConfig<LoadBalancingRule, LoadBalancer> CreateLoadBalancingRule(
+        public static INestedResourceConfig<LoadBalancingRule, LoadBalancer> CreateLoadBalancingRule(
             this ResourceConfig<LoadBalancer> loadBalancer,
             string name,
-            NestedResourceConfig<FrontendIPConfiguration, LoadBalancer> fronendIpConfiguration,
-            NestedResourceConfig<BackendAddressPool, LoadBalancer> backendAddressPool,
+            INestedResourceConfig<FrontendIPConfiguration, LoadBalancer> fronendIpConfiguration,
+            INestedResourceConfig<BackendAddressPool, LoadBalancer> backendAddressPool,
             int frontendPort,
             int backendPort)
             => loadBalancer.CreateNested(

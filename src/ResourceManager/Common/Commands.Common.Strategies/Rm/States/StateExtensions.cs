@@ -27,7 +27,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         /// <param name="config"></param>
         /// <returns></returns>
         public static TModel Get<TModel, TParentModel>(
-            this IState state, NestedResourceConfig<TModel, TParentModel> config)
+            this IState state, INestedResourceConfig<TModel, TParentModel> config)
             where TModel : class
             where TParentModel : class
         {
@@ -48,7 +48,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
             => config.Accept(new GetVisitor<TModel>(), state);
 
         public static bool Contains<TModel, TParentModel>(
-            this IState state, NestedResourceConfig<TModel, TParentModel> config)
+            this IState state, INestedResourceConfig<TModel, TParentModel> config)
             where TModel : class
             where TParentModel : class
             => state.Get(config) != null;

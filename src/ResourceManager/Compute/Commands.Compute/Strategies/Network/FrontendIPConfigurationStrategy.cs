@@ -28,7 +28,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 getName: model => model.Name,
                 setName: (model, name) => model.Name = name);
 
-        public static NestedResourceConfig<FrontendIPConfiguration, LoadBalancer> CreateFrontendIPConfiguration(
+        public static INestedResourceConfig<FrontendIPConfiguration, LoadBalancer> CreateFrontendIPConfiguration(
             this ResourceConfig<LoadBalancer> loadBalancer,
             string name,
             ResourceConfig<PublicIPAddress> publicIpAddress)

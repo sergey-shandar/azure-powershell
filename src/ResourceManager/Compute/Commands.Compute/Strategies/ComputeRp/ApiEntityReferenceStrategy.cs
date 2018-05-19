@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
     static class ApiEntityReferenceStrategy
     {
         public static ApiEntityReference GetReference(
-            this IEngine engine, NestedResourceConfig<Subnet, VirtualNetwork> subnet)
+            this IEngine engine, INestedResourceConfig<Subnet, VirtualNetwork> subnet)
             => new ApiEntityReference { Id = engine.GetId(subnet) };
     }
 }

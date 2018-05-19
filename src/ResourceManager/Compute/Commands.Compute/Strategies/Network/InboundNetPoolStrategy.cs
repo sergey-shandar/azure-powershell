@@ -28,10 +28,10 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 getName: p => p.Name,
                 setName: (p, name) => p.Name = name);
 
-        public static NestedResourceConfig<InboundNatPool, LoadBalancer> CreateInboundNatPool(
+        public static INestedResourceConfig<InboundNatPool, LoadBalancer> CreateInboundNatPool(
             this ResourceConfig<LoadBalancer> loadBalancer,
             string name,
-            NestedResourceConfig<FrontendIPConfiguration, LoadBalancer> frontendIpConfiguration,
+            INestedResourceConfig<FrontendIPConfiguration, LoadBalancer> frontendIpConfiguration,
             int frontendPortRangeStart,
             int frontendPortRangeEnd,
             int backendPort)

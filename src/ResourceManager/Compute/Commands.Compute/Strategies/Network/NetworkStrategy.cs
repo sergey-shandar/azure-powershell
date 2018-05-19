@@ -43,7 +43,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 createTime: createTime);
 
         public static TModel GetReference<TModel, TParentModel>(
-            this IEngine engine, NestedResourceConfig<TModel, TParentModel> config)
+            this IEngine engine, INestedResourceConfig<TModel, TParentModel> config)
             where TModel : SubResource, new()
             where TParentModel : Resource
             => new TModel { Id = engine.GetId(config) };

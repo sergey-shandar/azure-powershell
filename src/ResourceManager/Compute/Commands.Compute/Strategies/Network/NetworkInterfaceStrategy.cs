@@ -35,7 +35,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
         public static ResourceConfig<NetworkInterface> CreateNetworkInterfaceConfig(
             this ResourceConfig<ResourceGroup> resourceGroup,
             string name,
-            NestedResourceConfig<Subnet, VirtualNetwork> subnet,
+            INestedResourceConfig<Subnet, VirtualNetwork> subnet,
             ResourceConfig<PublicIPAddress> publicIPAddress,
             ResourceConfig<NetworkSecurityGroup> networkSecurityGroup = null)
             => Strategy.CreateResourceConfig(
