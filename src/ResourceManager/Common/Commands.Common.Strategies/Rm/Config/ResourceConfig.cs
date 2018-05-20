@@ -24,7 +24,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     /// including name, resource group name, dependencies, model creation function, etc.
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public sealed class ResourceConfig<TModel> : IEntityConfig<TModel>, IResourceConfig
+    public sealed class ResourceConfig<TModel> : IResourceConfig<TModel>
         where TModel : class
     {
         public IResourceStrategy<TModel> Strategy { get; }
