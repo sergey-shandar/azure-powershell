@@ -19,7 +19,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm
 {
     interface IShouldProcess
     {
-        Task<bool> ShouldCreate<TModel>(ResourceConfig<TModel> config, TModel model)
+        Task<bool> ShouldCreate<TModel>(IResourceConfig<TModel> config, TModel model)
             where TModel : class;
     }
 }

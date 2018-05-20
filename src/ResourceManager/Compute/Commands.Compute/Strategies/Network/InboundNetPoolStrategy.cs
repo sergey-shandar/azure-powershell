@@ -29,7 +29,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 setName: (p, name) => p.Name = name);
 
         public static INestedResourceConfig<InboundNatPool, LoadBalancer> CreateInboundNatPool(
-            this ResourceConfig<LoadBalancer> loadBalancer,
+            this IResourceConfig<LoadBalancer> loadBalancer,
             string name,
             INestedResourceConfig<FrontendIPConfiguration, LoadBalancer> frontendIpConfiguration,
             int frontendPortRangeStart,

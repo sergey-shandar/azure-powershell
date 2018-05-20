@@ -21,7 +21,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
     /// </summary>
     public interface IState
     {
-        TModel Get<TModel>(ResourceConfig<TModel> config)
+        TModel Get<TModel>(IResourceConfig<TModel> config)
             where TModel : class;
 
         bool Contains(IResourceConfig config);

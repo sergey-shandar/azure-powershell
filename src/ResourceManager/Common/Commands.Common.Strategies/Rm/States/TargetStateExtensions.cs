@@ -25,7 +25,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
             => config.GetResourceDependencies().Where(target.Contains);
 
         public static IState GetTargetState<TModel>(
-            this ResourceConfig<TModel> config,
+            this IResourceConfig<TModel> config,
             IState current,
             IEngine engine,
             string location)
@@ -76,7 +76,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
                 }
             }
 
-            public TModel GetOrAdd<TModel>(ResourceConfig<TModel> config)
+            public TModel GetOrAdd<TModel>(IResourceConfig<TModel> config)
                 where TModel : class
                 => Target.GetOrAdd(
                     config,
@@ -95,7 +95,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
 
         sealed class AddVisitor : IResourceConfigVisitor<Context, Void>
         {
-            public Void Visit<TModel>(ResourceConfig<TModel> config, Context context)
+            public Void Visit<TModel>(IResourceConfig<TModel> config, Context context)
                 where TModel : class
             {
                 context.GetOrAdd(config);

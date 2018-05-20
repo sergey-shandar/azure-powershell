@@ -34,8 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                     p.ResourceGroupName, p.Name, p.Model, p.CancellationToken),
                 createTime: c => 1);
 
-        public static ResourceConfig<AvailabilitySet> CreateAvailabilitySetConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup, string name)
+        public static IResourceConfig<AvailabilitySet> CreateAvailabilitySetConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup, string name)
             => Strategy.CreateResourceConfig(
                 resourceGroup: resourceGroup,
                 name: name,

@@ -43,7 +43,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         }
 
         public async Task<TModel> GetOrAdd<TModel>(
-            ResourceConfig<TModel> config, Func<Task<TModel>> operation)
+            IResourceConfig<TModel> config, Func<Task<TModel>> operation)
             where TModel : class
             => await _TaskMap.GetOrAddWithCast(
                 config.DefaultIdStr(),

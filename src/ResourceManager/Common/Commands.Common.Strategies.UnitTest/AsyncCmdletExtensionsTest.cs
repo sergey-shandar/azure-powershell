@@ -44,8 +44,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
             public string OutputTemplateFile
                 => null;
 
-            public async Task<ResourceConfig<RG>> CreateConfigAsync(
-                ResourceConfig<RG> resourceGroupConfig)
+            public async Task<IResourceConfig<RG>> CreateConfigAsync(
+                IResourceConfig<RG> resourceGroupConfig)
                 => new ResourceConfig<RG>(
                     ResourceStrategy.Create<RG, Client, Client>(
                         null,
@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.UnitTest
                     null,
                     null);
 
-            public ResourceConfig<RG> CreateResourceGroup()
+            public IResourceConfig<RG> CreateResourceGroup()
                 => null;
         }
 

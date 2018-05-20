@@ -33,8 +33,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                     p.ResourceGroupName, p.Name, p.Model, p.CancellationToken),
                 createTime: _ => 15);
 
-        public static ResourceConfig<VirtualNetwork> CreateVirtualNetworkConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        public static IResourceConfig<VirtualNetwork> CreateVirtualNetworkConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
             string addressPrefix)
             => Strategy.CreateResourceConfig(

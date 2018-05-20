@@ -24,7 +24,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Progress
     static class TimeSlotExtensions
     {
         public static ProgressMap GetProgressMap<TModel>(
-            this ResourceConfig<TModel> config, IState state)
+            this IResourceConfig<TModel> config, IState state)
             where TModel : class
         {
             var context = new Context(state);
@@ -50,7 +50,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Progress
             }
 
             public Tuple<TimeSlot, int> GetTimeSlotAndDuration<TModel>(
-                ResourceConfig<TModel> config)
+                IResourceConfig<TModel> config)
                 where TModel : class
                 => _Map.GetOrAdd(
                     config,
@@ -74,7 +74,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Progress
             IResourceConfigVisitor<Context, Tuple<TimeSlot, int>>
         {
             public Tuple<TimeSlot, int> Visit<TModel>(
-                ResourceConfig<TModel> config, Context context)
+                IResourceConfig<TModel> config, Context context)
                 where TModel : class
                 => context.GetTimeSlotAndDuration(config);
         }

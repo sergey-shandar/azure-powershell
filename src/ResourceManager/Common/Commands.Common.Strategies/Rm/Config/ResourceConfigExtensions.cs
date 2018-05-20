@@ -25,7 +25,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
 {
     public static class ResourceConfigExtensions
     {
-        public static ResourceConfig<TModel> CreateResourceConfig<TModel>(
+        public static IResourceConfig<TModel> CreateResourceConfig<TModel>(
             this IResourceStrategy<TModel> strategy,
             IResourceConfig resourceGroup,
             string name,
@@ -41,7 +41,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
                     .Concat(dependencies)
                     .Where(v => v != null));
 
-        public static ResourceConfig<TModel> CreateResourceConfig<TModel>(
+        public static IResourceConfig<TModel> CreateResourceConfig<TModel>(
             this IResourceStrategy<TModel> strategy,
             IResourceConfig resourceGroup,
             string name,
@@ -63,7 +63,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
         }
 
         internal static async Task<TModel> GetAsync<TModel>(
-            this ResourceConfig<TModel> config,
+            this IResourceConfig<TModel> config,
             IClient client,
             CancellationToken cancellationToken)
             where TModel : class
@@ -82,7 +82,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
         }
 
         internal static Task<TModel> CreateOrUpdateAsync<TModel>(
-            this ResourceConfig<TModel> config,
+            this IResourceConfig<TModel> config,
             IClient client,
             TModel model,
             CancellationToken cancellationToken)
@@ -105,5 +105,26 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
 
         internal static string GetFullName(this IResourceConfig config)
             => config.Strategy.Type.Provider + "/" + config.Name;
+
+        public static INestedResourceConfig<TNestedModel, TModel> CreateNested<TModel, TNestedModel>(
+            this IResourceConfig<TModel> config,
+            INestedResourceStrategy<TNestedModel, TModel> strategy,
+            string name,
+            Func<IEngine, TNestedModel> createModel = null)
+            where TModel : class
+            where TNestedModel : class, new()
+        {
+            // update dependencies
+            createModel = createModel ?? (_ => new TNestedModel());
+            var engine = new DependencyEngine();
+            createModel(engine);
+            //
+            return new NestedResourceConfig<TNestedModel, TModel>(
+                config,
+                strategy,
+                name,
+                createModel,
+                engine.Dependencies.Values);
+        }
     }
 }

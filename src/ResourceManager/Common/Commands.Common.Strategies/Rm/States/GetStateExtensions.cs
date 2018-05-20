@@ -30,7 +30,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public static async Task<IState> GetStateAsync<TModel>(
-            this ResourceConfig<TModel> config,
+            this IResourceConfig<TModel> config,
             IClient client,
             CancellationToken cancellationToken)
             where TModel : class
@@ -45,7 +45,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
             => config.Accept(new GetStateAsyncVisitor(), context);
 
         static async Task GetStateAsync<TModel>(
-            this StateOperationContext context, ResourceConfig<TModel> config)
+            this StateOperationContext context, IResourceConfig<TModel> config)
             where TModel : class
             => await context.GetOrAdd(
                 config,
@@ -66,7 +66,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         sealed class GetStateAsyncVisitor : IResourceConfigVisitor<StateOperationContext, Task>
         {
             public Task Visit<TModel>(
-                ResourceConfig<TModel> config, StateOperationContext context)
+                IResourceConfig<TModel> config, StateOperationContext context)
                 where TModel : class
                 => context.GetStateAsync(config);                
         }

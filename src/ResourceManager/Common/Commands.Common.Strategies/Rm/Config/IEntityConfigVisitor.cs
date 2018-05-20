@@ -16,7 +16,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
 {
     public interface IEntityConfigVisitor<TContext, TResult>
     {
-        TResult Visit<TModel>(ResourceConfig<TModel> config, TContext context)
+        TResult Visit<TModel>(IResourceConfig<TModel> config, TContext context)
             where TModel : class;
 
         TResult Visit<TModel, TParentModel>(
@@ -28,7 +28,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     public interface IEntityConfigVisitor<TModel, TContext, TResult>
         where TModel : class
     {
-        TResult Visit(ResourceConfig<TModel> config, TContext context);
+        TResult Visit(IResourceConfig<TModel> config, TContext context);
 
         TResult Visit<TParentModel>(
             INestedResourceConfig<TModel, TParentModel> config, TContext context)

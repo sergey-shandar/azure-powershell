@@ -26,11 +26,11 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
             => config == null ? null : new SubResource { Id = engine.GetId(config) };
 
         public static SubResource GetReference(
-            this IEngine engine, ResourceConfig<AvailabilitySet> availabilitySet)
+            this IEngine engine, IResourceConfig<AvailabilitySet> availabilitySet)
             => engine.GetSubResourceReference(availabilitySet);
 
         public static SubResource GetReference(
-            this IEngine engine, ResourceConfig<N.NetworkSecurityGroup> networkSecurityGroup)
+            this IEngine engine, IResourceConfig<N.NetworkSecurityGroup> networkSecurityGroup)
             => engine.GetSubResourceReference(networkSecurityGroup);
 
         public static SubResource GetReference(

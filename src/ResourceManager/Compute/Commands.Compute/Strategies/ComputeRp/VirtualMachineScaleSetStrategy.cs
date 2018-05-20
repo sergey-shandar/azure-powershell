@@ -37,13 +37,13 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                     p.ResourceGroupName, p.Name, p.Model, p.CancellationToken),
                 createTime: _ => 180);
 
-        internal static ResourceConfig<VirtualMachineScaleSet> CreateVirtualMachineScaleSetConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        internal static IResourceConfig<VirtualMachineScaleSet> CreateVirtualMachineScaleSetConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
             INestedResourceConfig<Subnet, VirtualNetwork> subnet,
             INestedResourceConfig<BackendAddressPool, LoadBalancer> backendAdressPool,
             IEnumerable<INestedResourceConfig<InboundNatPool, LoadBalancer>> inboundNatPools,
-            ResourceConfig<NetworkSecurityGroup> networkSecurityGroup,
+            IResourceConfig<NetworkSecurityGroup> networkSecurityGroup,
             ImageAndOsType imageAndOsType,
             Credential credential,
             string vmSize,

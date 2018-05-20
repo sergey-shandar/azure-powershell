@@ -42,8 +42,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
             Standard,
         }
 
-        public static ResourceConfig<LoadBalancer> CreateLoadBalancerConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        public static IResourceConfig<LoadBalancer> CreateLoadBalancerConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
             Sku sku)
             => Strategy.CreateResourceConfig(

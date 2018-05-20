@@ -32,12 +32,12 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                     p.ResourceGroupName, p.Name, p.Model, p.CancellationToken),
                 createTime: _ => 5);
 
-        public static ResourceConfig<NetworkInterface> CreateNetworkInterfaceConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        public static IResourceConfig<NetworkInterface> CreateNetworkInterfaceConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
             INestedResourceConfig<Subnet, VirtualNetwork> subnet,
-            ResourceConfig<PublicIPAddress> publicIPAddress,
-            ResourceConfig<NetworkSecurityGroup> networkSecurityGroup = null)
+            IResourceConfig<PublicIPAddress> publicIPAddress,
+            IResourceConfig<NetworkSecurityGroup> networkSecurityGroup = null)
             => Strategy.CreateResourceConfig(
                 resourceGroup: resourceGroup,
                 name: name,

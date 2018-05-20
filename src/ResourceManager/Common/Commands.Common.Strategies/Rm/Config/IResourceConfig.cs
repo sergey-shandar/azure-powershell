@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using System;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
 {
@@ -35,6 +36,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     public interface IResourceConfig<TModel> : IEntityConfig<TModel>, IResourceConfig
         where TModel : class
     {
+        new IResourceStrategy<TModel> Strategy { get; }
 
+        Func<IEngine, TModel> CreateModel { get; }
     }
 }

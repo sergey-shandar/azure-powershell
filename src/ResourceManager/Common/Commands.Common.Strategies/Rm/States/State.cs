@@ -26,11 +26,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         readonly ConcurrentDictionary<string, object> _Map
             = new ConcurrentDictionary<string, object>();
 
-        public TModel Get<TModel>(ResourceConfig<TModel> config)
+        public TModel Get<TModel>(IResourceConfig<TModel> config)
             where TModel : class
             => _Map.GetOrNull(config?.DefaultIdStr()) as TModel;
 
-        public TModel GetOrAdd<TModel>(ResourceConfig<TModel> config, Func<TModel> f)
+        public TModel GetOrAdd<TModel>(IResourceConfig<TModel> config, Func<TModel> f)
             where TModel : class
             => _Map.GetOrAddWithCast(config.DefaultIdStr(), f);
 

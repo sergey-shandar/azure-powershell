@@ -167,7 +167,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Cmdlets
                 _Cmdlet = cmdlet;
             }
 
-            public Task<bool> ShouldCreate<TModel>(ResourceConfig<TModel> config, TModel model)
+            public Task<bool> ShouldCreate<TModel>(IResourceConfig<TModel> config, TModel model)
                 where TModel : class
                 => _Cmdlet.ShouldProcessAsync(config.GetFullName(), _Cmdlet.VerbsNew);
         }

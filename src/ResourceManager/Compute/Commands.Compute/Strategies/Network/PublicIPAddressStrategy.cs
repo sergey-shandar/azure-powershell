@@ -42,8 +42,8 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
             Standard,
         }
 
-        public static ResourceConfig<PublicIPAddress> CreatePublicIPAddressConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        public static IResourceConfig<PublicIPAddress> CreatePublicIPAddressConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
             string domainNameLabel,
             string allocationMethod,

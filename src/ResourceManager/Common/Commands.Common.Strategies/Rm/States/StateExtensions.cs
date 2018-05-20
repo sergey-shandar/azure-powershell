@@ -59,7 +59,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         sealed class GetVisitor<TModel> : IEntityConfigVisitor<TModel, IState, TModel>
             where TModel : class
         {
-            public TModel Visit(ResourceConfig<TModel> config, IState state)
+            public TModel Visit(IResourceConfig<TModel> config, IState state)
                 => state.Get(config);
 
             public TModel Visit<TParentModel>(
@@ -70,7 +70,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
 
         sealed class ContainsDispatchVisitor : IEntityConfigVisitor<IState, bool>
         {
-            public bool Visit<TModel>(ResourceConfig<TModel> config, IState context)
+            public bool Visit<TModel>(IResourceConfig<TModel> config, IState context)
                 where TModel : class
                 => context.Contains(config);
 

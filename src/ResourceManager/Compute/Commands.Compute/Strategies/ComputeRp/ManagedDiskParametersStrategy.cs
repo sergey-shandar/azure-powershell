@@ -21,7 +21,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
     static class ManagedDiskParametersStrategy
     {
         public static ManagedDiskParameters GetReference(
-            this IEngine engine, ResourceConfig<Disk> disk, string storageAccountTypes)
+            this IEngine engine, IResourceConfig<Disk> disk, string storageAccountTypes)
             => new ManagedDiskParameters
             {
                 Id = engine.GetId(disk),

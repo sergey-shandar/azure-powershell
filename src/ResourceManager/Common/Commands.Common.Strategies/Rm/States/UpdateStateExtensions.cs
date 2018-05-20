@@ -35,7 +35,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
         /// <param name="reportTaskProgress">A callback to report task progress.</param>
         /// <returns></returns>
         public static async Task<IState> UpdateStateAsync<TModel>(
-            this ResourceConfig<TModel> config,
+            this IResourceConfig<TModel> config,
             IClient client,
             IState target,
             CancellationToken cancellationToken,
@@ -169,7 +169,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
                 _ProgressMap = progressMap;
             }
 
-            public async Task UpdateStateAsync<TModel>(ResourceConfig<TModel> config)
+            public async Task UpdateStateAsync<TModel>(IResourceConfig<TModel> config)
                 where TModel : class
             {
                 var model = _Target.Get(config);
@@ -211,7 +211,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.States
 
         sealed class UpdateStateAsyncVisitor : IResourceConfigVisitor<Context, Task>
         {
-            public Task Visit<TModel>(ResourceConfig<TModel> config, Context context)
+            public Task Visit<TModel>(IResourceConfig<TModel> config, Context context)
                 where TModel : class
                 => context.UpdateStateAsync(config);
         }

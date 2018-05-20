@@ -30,7 +30,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 setName: (model, name) => model.Name = name);
 
         public static INestedResourceConfig<Subnet, VirtualNetwork> CreateSubnet(
-            this ResourceConfig<VirtualNetwork> virtualNetwork, string name, string addressPrefix)
+            this IResourceConfig<VirtualNetwork> virtualNetwork, string name, string addressPrefix)
             => virtualNetwork.CreateNested(
                 strategy: Strategy,
                 name: name,

@@ -30,7 +30,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         /// </summary>
         string Location { get; set; }
 
-        ResourceConfig<TResourceGroup> CreateResourceGroup();
+        IResourceConfig<TResourceGroup> CreateResourceGroup();
 
         /// <summary>
         /// Default location. It's used if Location is null and it can't be infered.
@@ -41,8 +41,8 @@ namespace Microsoft.Azure.Commands.Common.Strategies
         /// Create an Azure resource configuration according to the parameters.
         /// </summary>
         /// <returns></returns>
-        Task<ResourceConfig<TModel>> CreateConfigAsync(
-            ResourceConfig<TResourceGroup> resourceGroupConfig);
+        Task<IResourceConfig<TModel>> CreateConfigAsync(
+            IResourceConfig<TResourceGroup> resourceGroupConfig);
 
         string OutputTemplateFile { get; }
     }

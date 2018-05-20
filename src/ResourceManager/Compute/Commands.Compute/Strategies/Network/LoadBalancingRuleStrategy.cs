@@ -29,7 +29,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 setName: (model, name) => model.Name = name);
 
         public static INestedResourceConfig<LoadBalancingRule, LoadBalancer> CreateLoadBalancingRule(
-            this ResourceConfig<LoadBalancer> loadBalancer,
+            this IResourceConfig<LoadBalancer> loadBalancer,
             string name,
             INestedResourceConfig<FrontendIPConfiguration, LoadBalancer> fronendIpConfiguration,
             INestedResourceConfig<BackendAddressPool, LoadBalancer> backendAddressPool,

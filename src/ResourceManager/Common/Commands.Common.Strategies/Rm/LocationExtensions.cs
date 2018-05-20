@@ -34,7 +34,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm
             => config.Accept(new GetDependencyLocationVisitor(), state);
 
         static DependencyLocation GetDependencyLocation<TModel>(
-            this IState state, ResourceConfig<TModel> config)
+            this IState state, IResourceConfig<TModel> config)
             where TModel : class
         {
             var info = state.Get(config);
@@ -48,9 +48,10 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm
                     .Aggregate(null as DependencyLocation, Merge);
         }
 
-        sealed class GetDependencyLocationVisitor : IResourceConfigVisitor<IState, DependencyLocation>
+        sealed class GetDependencyLocationVisitor :
+            IResourceConfigVisitor<IState, DependencyLocation>
         {
-            public DependencyLocation Visit<TModel>(ResourceConfig<TModel> config, IState state)
+            public DependencyLocation Visit<TModel>(IResourceConfig<TModel> config, IState state)
                 where TModel : class
                 => state.GetDependencyLocation(config);
         }

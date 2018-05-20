@@ -156,8 +156,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             public string OutputTemplateFile
                 => _cmdlet.OutputTemplateFile;
 
-            public async Task<ResourceConfig<VirtualMachineScaleSet>> CreateConfigAsync(
-                ResourceConfig<Rm.ResourceGroup> resourceGroup)
+            public async Task<IResourceConfig<VirtualMachineScaleSet>> CreateConfigAsync(
+                IResourceConfig<Rm.ResourceGroup> resourceGroup)
             {
                 ImageAndOsType = await _client.UpdateImageAndOsTypeAsync(
                     ImageAndOsType, _cmdlet.ResourceGroupName, _cmdlet.ImageName, Location);
@@ -259,7 +259,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     identity: _cmdlet.GetVmssIdentityFromArgs());
             }
 
-            public ResourceConfig<Rm.ResourceGroup> CreateResourceGroup()
+            public IResourceConfig<Rm.ResourceGroup> CreateResourceGroup()
                 => ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
         }
 

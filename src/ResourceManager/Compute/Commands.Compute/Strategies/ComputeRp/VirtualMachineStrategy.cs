@@ -38,14 +38,14 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                         ? 240
                         : 120);
 
-        public static ResourceConfig<VirtualMachine> CreateVirtualMachineConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        public static IResourceConfig<VirtualMachine> CreateVirtualMachineConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
-            ResourceConfig<NetworkInterface> networkInterface,
+            IResourceConfig<NetworkInterface> networkInterface,
             ImageAndOsType imageAndOsType,
             Credential credential,
             string size,
-            ResourceConfig<AvailabilitySet> availabilitySet,
+            IResourceConfig<AvailabilitySet> availabilitySet,
             VirtualMachineIdentity identity,
             IEnumerable<int> dataDisks,
             IList<string> zones)
@@ -84,14 +84,14 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
                     Zones = zones,
                 });
 
-        public static ResourceConfig<VirtualMachine> CreateVirtualMachineConfig(
-            this ResourceConfig<ResourceGroup> resourceGroup,
+        public static IResourceConfig<VirtualMachine> CreateVirtualMachineConfig(
+            this IResourceConfig<ResourceGroup> resourceGroup,
             string name,
-            ResourceConfig<NetworkInterface> networkInterface,
+            IResourceConfig<NetworkInterface> networkInterface,
             OperatingSystemTypes osType,
-            ResourceConfig<Disk> disk,
+            IResourceConfig<Disk> disk,
             string size,
-            ResourceConfig<AvailabilitySet> availabilitySet,
+            IResourceConfig<AvailabilitySet> availabilitySet,
             VirtualMachineIdentity identity,
             IEnumerable<int> dataDisks,
             IList<string> zones)

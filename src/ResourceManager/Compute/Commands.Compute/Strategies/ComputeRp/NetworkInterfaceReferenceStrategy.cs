@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ComputeRp
     static class NetworkInterfaceReferenceStrategy
     {
         public static NetworkInterfaceReference GetReference(
-            this IEngine engine, ResourceConfig<NetworkInterface> networkInterface)
+            this IEngine engine, IResourceConfig<NetworkInterface> networkInterface)
             => new NetworkInterfaceReference { Id = engine.GetId(networkInterface) };
     }
 }

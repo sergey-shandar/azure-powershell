@@ -29,9 +29,9 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
                 setName: (model, name) => model.Name = name);
 
         public static INestedResourceConfig<FrontendIPConfiguration, LoadBalancer> CreateFrontendIPConfiguration(
-            this ResourceConfig<LoadBalancer> loadBalancer,
+            this IResourceConfig<LoadBalancer> loadBalancer,
             string name,
-            ResourceConfig<PublicIPAddress> publicIpAddress)
+            IResourceConfig<PublicIPAddress> publicIpAddress)
                 => loadBalancer.CreateNested(
                     strategy: Strategy,
                     name: name,

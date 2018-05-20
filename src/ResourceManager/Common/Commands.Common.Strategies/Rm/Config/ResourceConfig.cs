@@ -24,7 +24,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
     /// including name, resource group name, dependencies, model creation function, etc.
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public sealed class ResourceConfig<TModel> : IResourceConfig<TModel>
+    sealed class ResourceConfig<TModel> : IResourceConfig<TModel>
         where TModel : class
     {
         public IResourceStrategy<TModel> Strategy { get; }
@@ -73,25 +73,6 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
             => ResourceGroup == null 
                 ? Enumerable.Empty<string>()
                 : new[] { Strategy.Type.Namespace, Strategy.Type.Provider, Name };
-
-        public INestedResourceConfig<TNestedModel, TModel> CreateNested<TNestedModel>(
-            INestedResourceStrategy<TNestedModel, TModel> strategy,
-            string name,
-            Func<IEngine, TNestedModel> createModel = null)
-            where TNestedModel : class, new()
-        {
-            // update dependencies
-            createModel = createModel ?? (_ => new TNestedModel());
-            var engine = new DependencyEngine();
-            createModel(engine);
-            //
-            return new NestedResourceConfig<TNestedModel, TModel>(
-                this,
-                strategy,
-                name,
-                createModel,
-                engine.Dependencies.Values);
-        }
 
         TResult IEntityConfig.Accept<TContext, TResult>(
             IEntityConfigVisitor<TContext, TResult> visitor, TContext context)

@@ -35,7 +35,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Templates
         /// <param name="subscriptionId">subscription id</param>
         /// <returns></returns>
         public static Template CreateTemplate<TModel>(
-            this ResourceConfig<TModel> config,
+            this IResourceConfig<TModel> config,
             IClient client,
             IState target,
             TemplateEngine engine)
@@ -68,7 +68,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Templates
                 Engine = engine;
             }
 
-            public void CreateResource<TModel>(ResourceConfig<TModel> config)
+            public void CreateResource<TModel>(IResourceConfig<TModel> config)
                 where TModel : class
             {
                 // ignore a resource group
@@ -105,7 +105,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Templates
 
         sealed class CreateResourceVisitor : IResourceConfigVisitor<Context, Void>
         {
-            public Void Visit<TModel>(ResourceConfig<TModel> config, Context context)
+            public Void Visit<TModel>(IResourceConfig<TModel> config, Context context)
                 where TModel : class
             {
                 context.CreateResource(config);

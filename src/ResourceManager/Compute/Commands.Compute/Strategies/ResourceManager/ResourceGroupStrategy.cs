@@ -34,7 +34,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.ResourceManager
                 setLocation: (model, location) => model.Location = location,
                 createTime: _ => 3);
 
-        public static ResourceConfig<ResourceGroup> CreateResourceGroupConfig(string name)
+        public static IResourceConfig<ResourceGroup> CreateResourceGroupConfig(string name)
             => Strategy.CreateResourceConfig(null, name);
     }
 }

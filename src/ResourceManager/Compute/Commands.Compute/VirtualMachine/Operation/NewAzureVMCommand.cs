@@ -271,8 +271,8 @@ namespace Microsoft.Azure.Commands.Compute
 
             public BlobUri DestinationUri;
 
-            public async Task<ResourceConfig<VirtualMachine>> CreateConfigAsync(
-                ResourceConfig<ResourceGroup> resourceGroup)
+            public async Task<IResourceConfig<VirtualMachine>> CreateConfigAsync(
+                IResourceConfig<ResourceGroup> resourceGroup)
             {
                 if (_cmdlet.DiskFile == null)
                 {
@@ -341,7 +341,7 @@ namespace Microsoft.Azure.Commands.Compute
                 }
             }
 
-            public ResourceConfig<ResourceGroup> CreateResourceGroup()
+            public IResourceConfig<ResourceGroup> CreateResourceGroup()
                 => ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
         }
 

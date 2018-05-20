@@ -49,7 +49,7 @@ namespace Microsoft.Azure.Commands.Compute.Strategies.Network
             => new TModel { Id = engine.GetId(config) };
 
         public static TModel GetReference<TModel>(
-            this IEngine engine, ResourceConfig<TModel> config)
+            this IEngine engine, IResourceConfig<TModel> config)
             where TModel : Resource, new()
             => new TModel { Id = engine.GetId(config) };
 
