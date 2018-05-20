@@ -33,6 +33,11 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config
             INestedResourceConfigVisitor<TParentModel, TContext, TResult> visitor, TContext context);
     }
 
+    /// <summary>
+    /// Nested resource configuration. Fro example, Subnet.
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
+    /// <typeparam name="TParentModel"></typeparam>
     public interface INestedResourceConfig<TModel, TParentModel> :
         INestedResourceConfig<TParentModel>,
         IEntityConfig<TModel>
