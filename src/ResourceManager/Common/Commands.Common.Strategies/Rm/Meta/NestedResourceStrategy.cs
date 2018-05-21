@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
+namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Meta
 {
     public static class NestedResourceStrategy
     {

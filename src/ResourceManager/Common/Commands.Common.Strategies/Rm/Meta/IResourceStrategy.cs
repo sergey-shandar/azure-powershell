@@ -12,29 +12,32 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using System.Threading;
+using System;
+using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
+namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Meta
 {
     /// <summary>
-    /// Parameters for GetAsync functions.
+    /// Base interface for ResourceStrategy[].
     /// </summary>
-    public sealed class GetAsyncParams
+    public interface IResourceStrategy : IEntityStrategy
     {
-        public string ResourceGroupName { get; }
+        ResourceType Type { get; }
 
-        public string Name { get; }
+        /// <summary>
+        /// Returns an API version.
+        /// </summary>
+        Func<IClient, string> GetApiVersion { get; }
+    }
 
-        public CancellationToken CancellationToken { get; }
+    public interface IResourceStrategy<TModel> : IResourceStrategy
+    {
+        Func<IClient, GetAsyncParams, Task<TModel>> GetAsync { get; }
 
-        public GetAsyncParams(
-            string resourceGroupName,
-            string name,
-            CancellationToken cancellationToken)
-        {
-            ResourceGroupName = resourceGroupName;
-            Name = name;
-            CancellationToken = cancellationToken;
-        }
+        Func<IClient, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> CreateOrUpdateAsync { get; }
+
+        Property<TModel, string> Location { get; }
+
+        Func<TModel, int> CreateTime { get; }
     }
 }

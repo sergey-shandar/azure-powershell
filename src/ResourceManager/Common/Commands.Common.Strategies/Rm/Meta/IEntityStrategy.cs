@@ -12,7 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
+namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Meta
 {
     /// <summary>
     /// Base interface for ResourceStrategy and NestedResourceStrategy classes.

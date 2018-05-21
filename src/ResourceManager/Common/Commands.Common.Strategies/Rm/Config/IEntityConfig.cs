@@ -12,7 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Meta;
 using System.Collections.Generic;
 
 namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Config

@@ -19,7 +19,7 @@ using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Meta;
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
 using Microsoft.Azure.Commands.Common.Strategies.Rm;
 

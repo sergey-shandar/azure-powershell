@@ -16,7 +16,7 @@ using Microsoft.Rest;
 using System;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
+namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Meta
 {
     public static class ResourceStrategy
     {

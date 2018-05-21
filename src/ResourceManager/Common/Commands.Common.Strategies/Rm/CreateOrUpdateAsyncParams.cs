@@ -14,7 +14,7 @@
 
 using System.Threading;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
+namespace Microsoft.Azure.Commands.Common.Strategies.Rm
 {
     static class CreateOrUpdateAsyncParams
     {

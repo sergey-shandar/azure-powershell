@@ -14,7 +14,7 @@
 
 using Microsoft.Azure.Commands.Common.Strategies.Rm;
 using Microsoft.Azure.Commands.Common.Strategies.Rm.Config;
-using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Meta;
 using Microsoft.Azure.Management.Internal.Network.Version2017_10_01.Models;
 
 namespace Microsoft.Azure.Commands.Compute.Strategies.Network

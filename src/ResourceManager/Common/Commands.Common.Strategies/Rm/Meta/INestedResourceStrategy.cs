@@ -13,31 +13,20 @@
 // ----------------------------------------------------------------------------------
 
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
-namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Entities
+namespace Microsoft.Azure.Commands.Common.Strategies.Rm.Meta
 {
-    /// <summary>
-    /// Base interface for ResourceStrategy[].
-    /// </summary>
-    public interface IResourceStrategy : IEntityStrategy
+    public interface INestedResourceStrategy : IEntityStrategy
     {
-        ResourceType Type { get; }
-
-        /// <summary>
-        /// Returns an API version.
-        /// </summary>
-        Func<IClient, string> GetApiVersion { get; }
     }
 
-    public interface IResourceStrategy<TModel> : IResourceStrategy
+    public interface INestedResourceStrategy<TModel, TParentModel> : INestedResourceStrategy
     {
-        Func<IClient, GetAsyncParams, Task<TModel>> GetAsync { get; }
+        Func<string, IEnumerable<string>> GetId { get; }
 
-        Func<IClient, CreateOrUpdateAsyncParams<TModel>, Task<TModel>> CreateOrUpdateAsync { get; }
+        Func<TParentModel, string, TModel> Get { get; }
 
-        Property<TModel, string> Location { get; }
-
-        Func<TModel, int> CreateTime { get; }
+        Action<TParentModel, string, TModel> CreateOrUpdate { get; }
     }
 }
