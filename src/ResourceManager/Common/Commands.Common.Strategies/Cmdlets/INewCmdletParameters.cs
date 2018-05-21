@@ -21,7 +21,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies
     /// Describes Azure operation parameters and a target resource.
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public interface ICmdletParameters<TModel, TResourceGroup>
+    public interface INewCmdletParameters<TModel, TResourceGroup>
         where TModel : class
         where TResourceGroup : class
     {

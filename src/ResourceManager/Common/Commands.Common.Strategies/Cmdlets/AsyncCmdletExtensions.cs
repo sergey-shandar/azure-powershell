@@ -52,7 +52,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.Cmdlets
         /// <returns></returns>
         public static async Task<TModel> RunAsync<TModel, TResourceGroup>(
             this IClient client,
-            ICmdletParameters<TModel, TResourceGroup> parameters,
+            INewCmdletParameters<TModel, TResourceGroup> parameters,
             IAsyncCmdlet asyncCmdlet)
             where TModel : class
             where TResourceGroup : class

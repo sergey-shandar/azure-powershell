@@ -63,7 +63,7 @@
     <Compile Include="Rm\Config\INestedResourceConfig.cs" />
     <Compile Include="Rm\Config\INestedResourceConfigVisitor.cs" />
     <Compile Include="Rm\Meta\INestedResourceStrategy.cs" />
-    <Compile Include="Cmdlets\ICmdletParameters.cs" />
+    <Compile Include="Cmdlets\INewCmdletParameters.cs" />
     <Compile Include="Rm\IResourceId.cs" />
     <Compile Include="Rm\Parameter.cs" />
     <Compile Include="Property.cs" />

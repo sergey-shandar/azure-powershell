@@ -131,7 +131,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         const int FirstPortRangeStart = 50000;
 
-        sealed class Parameters : ICmdletParameters<VirtualMachineScaleSet, Rm.ResourceGroup>
+        sealed class Parameters : INewCmdletParameters<VirtualMachineScaleSet, Rm.ResourceGroup>
         {
             NewAzureRmVmss _cmdlet { get; }
 

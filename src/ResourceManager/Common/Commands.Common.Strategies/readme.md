@@ -1,58 +1,14 @@
 ﻿# Strategies
 
-- [X] partly done, public extensions vs private extensions
-- [X] partly done, public extensions in a simple common namespace
-- [X] no Utilities namespace
-- [X] move UniqueId to Compute and make private.
-- [X] move Compute to Compute.
-- ResourceConfig => IResourceConfig
-- NestedResourceConfig => INestedResourceConfig
-- ResourceStrategy => IResourceStrategy
-- NestedResourceStrategy => IResourceStrategy
-- [X] partly done (removed), template abstractions / dependency injection.
-
-## Future
-
-- move Cmdlets to a separeate PS common library. (Garrett)
-
 ## Design
 
-- Strategies for resources. It's a meta information about Azure resources which is missed in Azure SDK.
-      - Generic strategy interfaces.
-      - Specific implementations for different Azure resources. Each resource type should have only one implementation.
-- Configuration graph (DAG)
-      - Generic configuration interfaces.
-      - Specific implementations for different Azure resources. Each resource type may have different configuration implementations.
+## Resource Management
 
-- Utilities
-  - Azure State
-  - Generic JSON serializer/deserializer from/to JObject.
-  - Task Progress which works with graphs.
-  - Async support for PS
-  - Template support (WIP)
+[Rm/](Rm/).
 
-```C#
-interface IParameters<TModel, TResourceGroup>
-{
-
-}
-```
-
-### Changes
-
-`IParameters` => `INewCmdlet`.
-
-### Public Types
-
-- [Compute/](Compute/)
-- [Extensions.cs](Extensions.cs)
-- [UniqueId.cs](UniqueId.cs)
-
-### Private Types
-
-- [Json/](Json/)
-- [Templates/](Templates/)
-- [Progress/](Progress/)
+- [Rm/Meta/](Rm/Meta/) is meta information about Azure resources which is missed in Azure SDK.
+- [Rm/Config/](Rm/Config/) is a resource configuration graph (DAG).
+- [Rm/State/](Rm/State/) is a resource graph state, for example a state of resources in Azure. 
 
 ## Wish List
 
