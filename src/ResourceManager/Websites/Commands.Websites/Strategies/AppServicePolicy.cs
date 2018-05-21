@@ -13,7 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Common.Strategies.Rm;
-using Microsoft.Azure.Commands.Common.Strategies.Rm.Entities;
+using Microsoft.Azure.Commands.Common.Strategies.Rm.Meta;
 using Microsoft.Azure.Management.WebSites;
 using Microsoft.Azure.Management.WebSites.Models;
 using System;
@@ -23,7 +23,7 @@ namespace Microsoft.Azure.Commands.Common.Strategies.WebApps
 {
     static class AppServicePolicy
     {
-        public static ResourceStrategy<TModel> Create<TModel, TOperations>(
+        public static IResourceStrategy<TModel> Create<TModel, TOperations>(
             string provider,
             Func<WebSiteManagementClient, TOperations> getOperations,
             Func<TOperations, GetAsyncParams, Task<TModel>> getAsync,

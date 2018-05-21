@@ -253,7 +253,7 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
             return result;
         }
 
-        sealed class Parameters : ICmdletParameters<Site, ResourceGroup>
+        sealed class Parameters : INewCmdletParameters<Site, ResourceGroup>
         {
             readonly NewAzureWebAppCmdlet _cmdlet; 
 
@@ -273,7 +273,7 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
             public string OutputTemplateFile
                 => null;
 
-            public async Task<ResourceConfig<Site>> CreateConfigAsync(ResourceConfig<ResourceGroup> resourceGroup)
+            public async Task<IResourceConfig<Site>> CreateConfigAsync(IResourceConfig<ResourceGroup> resourceGroup)
             {
                 var planResourceGroup = _cmdlet.ResourceGroupName;
                 var planName = _cmdlet.AppServicePlan;
@@ -303,13 +303,8 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
                 return resourceGroup.CreateSiteConfig(farmStrategy, _cmdlet.Name);
             }
 
-            public ResourceConfig<ResourceGroup> CreateResourceGroup()
+            public IResourceConfig<ResourceGroup> CreateResourceGroup()
                 => ResourceGroupStrategy.CreateResourceGroupConfig(_cmdlet.ResourceGroupName);
-
-            ResourceConfig<ResourceGroup> ICmdletParameters<Site, ResourceGroup>.CreateResourceGroup()
-            {
-                throw new NotImplementedException();
-            }
         }
 
         public async Task CreateWithSimpleParameters(IAsyncCmdlet adapter)
